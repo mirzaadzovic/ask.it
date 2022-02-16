@@ -1,12 +1,31 @@
-const questions = [
-  { id: 1, text: "EEEE" },
-  { id: 2, text: "AAA" },
-  { id: 3, text: "kaki si mi ka čojk" },
-];
+const db = require("../db");
+const tables = {
+  questions: {
+    tblId: "questionId",
+    tblName: "questions",
+  },
+  users: {
+    tblId: "userId",
+    tblName: "users",
+  },
+};
 
 class BaseRepository {
-  getAll = () => questions;
-  getById = (id) => questions.find((x) => x.id === parseInt(id));
+  getAll = async (parameterDb) => {
+    const { tblName } = tables[parameterDb];
+    const response = await db.query(`SELECT * FROM ${tblName}`);
+    return response.rows;
+  };
+
+  getById = async (id, parameterDb) => {
+    const { tblName, tblId } = tables[parameterDb];
+    const response = await db.query(
+      `SELECT * FROM ${tblName} WHERE ${tblId} = $1`,
+      [id]
+    );
+    return response.rows[0];
+  };
+
   post = (body) => {
     questions.push(body);
     return questions[questions.length - 1];

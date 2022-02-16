@@ -3,6 +3,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const questions = require("./routes/questions.js");
 const app = express();
+require("dotenv").config();
 
 // MIDDLEWARE
 app.use(cors());
