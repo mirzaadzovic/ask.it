@@ -1,34 +1,34 @@
 const db = require("../db");
+const QueryHelper = require("../Helpers/QueryHelper");
 const tables = {
   questions: {
     tblId: "questionId",
-    tblName: "questions",
   },
   users: {
     tblId: "userId",
-    tblName: "users",
   },
 };
 
 class BaseRepository {
   getAll = async (parameterDb) => {
-    const { tblName } = tables[parameterDb];
-    const response = await db.query(`SELECT * FROM ${tblName}`);
+    const response = await db.query(`SELECT * FROM ${parameterDb}`);
     return response.rows;
   };
 
   getById = async (id, parameterDb) => {
-    const { tblName, tblId } = tables[parameterDb];
+    const { tblId } = tables[parameterDb];
     const response = await db.query(
-      `SELECT * FROM ${tblName} WHERE ${tblId} = $1`,
+      `SELECT * FROM ${parameterDb} WHERE ${tblId} = $1`,
       [id]
     );
     return response.rows[0];
   };
 
-  post = (body) => {
-    questions.push(body);
-    return questions[questions.length - 1];
+  post = async (body, parameterDb) => {
+    const query = QueryHelper.generateInsertQuery(body, parameterDb);
+    console.log(query);
+    const response = await db.query(query, Object.values(body));
+    return response;
   };
 }
 
