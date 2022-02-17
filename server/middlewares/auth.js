@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
-const secretKey = process.env.SECRET_KEY;
 
 const auth = async (req, res, next) => {
-  console.log(req.cookies);
+  const secretKey = process.env.SECRET_KEY;
+
   const token = req.cookies["ask_it"];
 
   if (!token) return res.status(401).send("UNAUTHORIZED");

@@ -9,10 +9,12 @@ const auth = require("./routes/auth");
 const app = express();
 const { db } = require("./db");
 const config = require("config");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 // MIDDLEWARE
 app.use(cors(config.get("cors_settings")));
+app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("dev"));
 

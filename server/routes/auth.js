@@ -60,6 +60,7 @@ router.post("/register", async (req, res) => {
 // @GET LOGGED IN USER
 router.get("/user", authMiddleware, async (req, res) => {
   try {
+    console.log(req.user);
     if (!req.user) return res.status(401).send("401 UNAUTHORIZED");
     const response = await User.findByPk(req.user.id);
     const user = new UserProfileDto(response.get());
