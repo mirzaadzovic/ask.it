@@ -25,7 +25,7 @@ class BaseRepository {
         const { id } = req.params;
         const response = await this.Model.findByPk(id).catch((err) => null);
 
-        if (!response) return res.status(404).send("Not found");
+        if (!response) return res.status(404).send("404 Not found");
 
         res.status(200).json(response);
       } catch {

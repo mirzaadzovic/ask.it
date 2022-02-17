@@ -1,4 +1,5 @@
 const db = require("../db");
+const UserDto = require("../dtos/UserDto");
 const QueryHelper = require("../Helpers/QueryHelper");
 const Answer = require("../models/Answer");
 const Question = require("../models/Question");
@@ -16,13 +17,41 @@ class QuestionsRepository extends BaseRepository {
         const response = await this.Model.findAll({
           limit: 20 * load,
           include: [
-            { model: User, as: "user" },
-            { model: Answer, as: "answer" },
+            {
+              model: User,
+              as: "user",
+            },
+            { model: Answer, as: "answers" },
           ],
           order: [["questiondate", "DESC"]],
         }).catch((err) => console.log(err.toString()));
 
         if (!response) return res.status(400).send("Bad request");
+
+        let questions = response.map((v) => v.toJSON());
+        questions = questions.map((q) => ({ ...q, user: new UserDto(q.user) }));
+
+        res.status(200).json(questions);
+      } catch (err) {
+        res.status(500).send(err.toString());
+      }
+    };
+  }
+
+  getById() {
+    return async (req, res) => {
+      try {
+        const { id } = req.params;
+        const response = await this.Model.findByPk(id, {
+          include: [
+            { model: User, as: "user" },
+            { model: Answer, as: "answers" },
+          ],
+        }).catch((err) => null);
+
+        if (!response) return res.status(404).send("Not found");
+
+        response.get().user = new UserDto(response.get().user);
 
         res.status(200).json(response);
       } catch (err) {

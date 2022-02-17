@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const { db } = require("../db");
 const Answer = require("./Answer");
+const Reaction = require("./Reaction");
 
 const Question = db.define(
   "question",
@@ -24,7 +25,10 @@ const Question = db.define(
   { timestamps: false }
 );
 
-Question.hasMany(Answer, { as: "answer", foreignKey: "questionid" });
+Question.hasMany(Answer, { as: "answers", foreignKey: "questionid" });
 Answer.hasOne(Question, { foreignKey: "questionid" });
+
+Question.hasMany(Reaction, { as: "reactions", foreignKey: "questionid" });
+Reaction.hasOne(Question, { foreignKey: "questionid" });
 
 module.exports = Question;

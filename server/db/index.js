@@ -1,7 +1,8 @@
 // const { Pool } = require("pg");
 const { Sequelize } = require("sequelize");
-const db = new Sequelize("ask_it", "postgres", "PZPpzp123", {
-  host: "localhost",
+const { PGUSER, PGHOST, PGPASSWORD, PGDATABASE } = process.env;
+const db = new Sequelize(PGDATABASE, PGUSER, PGPASSWORD, {
+  host: PGHOST,
   dialect: "postgres",
   pool: {
     max: 5,

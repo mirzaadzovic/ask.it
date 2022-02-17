@@ -1,6 +1,8 @@
 const { DataTypes } = require("sequelize");
 const { db } = require("../db");
+const Answer = require("./Answer");
 const Question = require("./Question");
+const Reaction = require("./Reaction");
 
 const User = db.define(
   "user",
@@ -39,5 +41,10 @@ const User = db.define(
 User.hasMany(Question, { as: "questions", foreignKey: "userid" });
 Question.belongsTo(User, { foreignKey: "userid" });
 
-console.log("EEE", db.models.user === User);
+User.hasMany(Answer, { as: "answers", foreignKey: "userid" });
+Answer.belongsTo(User, { foreignKey: "userid" });
+
+User.hasMany(Reaction, { as: "reactions", foreignKey: "userid" });
+Reaction.belongsTo(User, { foreignKey: "userid" });
+
 module.exports = User;
