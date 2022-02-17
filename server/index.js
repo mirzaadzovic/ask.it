@@ -5,6 +5,7 @@ const questions = require("./routes/questions.js");
 const users = require("./routes/users.js");
 const answers = require("./routes/answers.js");
 const reactions = require("./routes/reactions.js");
+const auth = require("./routes/auth");
 const app = express();
 const { db } = require("./db");
 const config = require("config");
@@ -22,6 +23,7 @@ app.use(`${API_ROUTE}/questions`, questions);
 app.use(`${API_ROUTE}/users`, users);
 app.use(`${API_ROUTE}/answers`, answers);
 app.use(`${API_ROUTE}/reactions`, reactions);
+app.use(`/auth`, auth);
 
 // DB CONNECT
 db.authenticate()

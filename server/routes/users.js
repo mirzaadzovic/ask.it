@@ -9,7 +9,7 @@ router.get("/", users.getAll());
 router.get("/:id", users.getById());
 
 // @POST
-router.post("/", users.post());
+// router.post("/", users.post());
 
 // @UPDATE
 router.put("/:id", users.update());

@@ -5,6 +5,9 @@ class UserDto {
     this.lastName = user.lastname;
     this.avatarUrl = user.avatarurl;
   }
+  getFullName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
 }
 
 module.exports = UserDto;
