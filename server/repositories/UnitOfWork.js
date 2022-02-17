@@ -1,12 +1,10 @@
 const QuestionsRepository = require("./QuestionsRepository.js");
+const UsersRepository = require("./UsersRepository.js");
 
 class UnitOfWork {
   constructor() {
-    if (UnitOfWork.repository) return UnitOfWork.repository;
-    else {
-      QuestionsRepository.repository = this;
-      this.questions = new QuestionsRepository();
-    }
+    this.questions = new QuestionsRepository();
+    this.users = new UsersRepository();
   }
 }
 
