@@ -6,7 +6,7 @@ const User = db.define(
   "user",
   {
     userid: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       primaryKey: true,
       autoIncrement: true,
     },

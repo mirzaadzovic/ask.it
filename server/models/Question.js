@@ -1,11 +1,12 @@
 const { DataTypes } = require("sequelize");
 const { db } = require("../db");
+const Answer = require("./Answer");
 
 const Question = db.define(
   "question",
   {
     questionid: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
       primaryKey: true,
       autoIncrement: true,
     },
@@ -17,10 +18,13 @@ const Question = db.define(
       defaultValue: DataTypes.NOW,
     },
     userid: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.BIGINT,
     },
   },
   { timestamps: false }
 );
+
+Question.hasMany(Answer, { as: "answer", foreignKey: "questionid" });
+Answer.hasOne(Question, { foreignKey: "questionid" });
 
 module.exports = Question;

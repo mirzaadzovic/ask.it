@@ -1,5 +1,6 @@
 const db = require("../db");
 const QueryHelper = require("../Helpers/QueryHelper");
+const Answer = require("../models/Answer");
 const Question = require("../models/Question");
 const User = require("../models/User");
 const BaseRepository = require("./BaseRepository");
@@ -14,7 +15,11 @@ class QuestionsRepository extends BaseRepository {
         const load = req.query.load || 1;
         const response = await this.Model.findAll({
           limit: 20 * load,
-          include: User,
+          include: [
+            { model: User, as: "user" },
+            { model: Answer, as: "answer" },
+          ],
+          order: [["questiondate", "DESC"]],
         }).catch((err) => console.log(err.toString()));
 
         if (!response) return res.status(400).send("Bad request");

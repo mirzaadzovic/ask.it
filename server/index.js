@@ -3,6 +3,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const questions = require("./routes/questions.js");
 const users = require("./routes/users.js");
+const answers = require("./routes/answers.js");
 const app = express();
 const { db } = require("./db");
 require("dotenv").config();
@@ -13,8 +14,11 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 // MIDDLEWARE -- ROUTES
-app.use("/api/v1/questions", questions);
-app.use("/api/v1/users", users);
+const { API_ROUTE } = process.env;
+
+app.use(`${API_ROUTE}/questions`, questions);
+app.use(`${API_ROUTE}/users`, users);
+app.use(`${API_ROUTE}/answers`, answers);
 app.get("/", (req, res) => res.send("HOME"));
 
 // DB CONNECT
