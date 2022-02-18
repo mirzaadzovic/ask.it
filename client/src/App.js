@@ -1,10 +1,11 @@
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dropdown from "./components/dropdown/Dropdown";
 import { connect } from "react-redux";
 import { selectOpenDropdown } from "./redux/reducers/dropdownReducer";
 import { closeDropdown } from "./redux/actions/dropdownActions";
+import Home from "./pages/home/Home";
 
 function App({ displayDropdown, close }) {
   return (
@@ -15,7 +16,9 @@ function App({ displayDropdown, close }) {
           {displayDropdown && <Dropdown />}
         </div>
         <div className="app__body">
-          <Routes></Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
         </div>
       </div>
     </BrowserRouter>

@@ -5,7 +5,6 @@ import UserAvatar from "../user_avatar/UserAvatar";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { connect } from "react-redux";
 import { toggleDropdown } from "../../redux/actions/dropdownActions";
-import { useEffect } from "react";
 
 const Navbar = ({ toggle }) => {
   return (

@@ -3,10 +3,16 @@
   background-color: var(--light-gray);
 }
 .app__body {
-  height: 100%;
   background-color: var(--light-gray);
 }
 
 .app__icon {
   color: lightgrey;
+}
+
+.app__card {
+  background-color: white !important;
+  border-radius: 5px;
+  box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.1);
+  margin: 5px 0px;
 }
