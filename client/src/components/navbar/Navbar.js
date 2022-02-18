@@ -1,13 +1,16 @@
-import React from "react";
 import Logo from "../logo/Logo";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import UserAvatar from "../user_profile/UserAvatar";
+import UserAvatar from "../user_avatar/UserAvatar";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { connect } from "react-redux";
+import { toggleDropdown } from "../../redux/actions/dropdownActions";
+import { useEffect } from "react";
 
-const Navbar = () => {
+const Navbar = ({ toggle }) => {
   return (
     <div className="navbar">
-      <Link to="/">
+      <Link className="navbar__logo" to="/">
         <Logo />
       </Link>
       <div className="navbar__options">
@@ -19,12 +22,23 @@ const Navbar = () => {
             Register
           </Link>
         </div> */}
-        <div className="navbar__optionsUser">
+
+        <div className="navbar__optionsUser" onClick={(e) => toggle(e)}>
           <UserAvatar />
+          <ArrowDropDownIcon className="app__icon" />
         </div>
       </div>
     </div>
   );
 };
 
-export default Navbar;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toggle: (e) => {
+      e.stopPropagation();
+      dispatch(toggleDropdown());
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Navbar);

@@ -29,10 +29,28 @@
 .navbar__optionsUser {
   padding: 5px 10px;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
 }
 
 .navbar__optionsUser:hover {
   background-color: var(--light-gray);
   transition: 0.2s;
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .navbar__options {
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 350px) {
+  .navbar {
+    padding: 5px 10px;
+    justify-content: end;
+  }
+  .navbar__logo {
+    display: none;
+  }
 }

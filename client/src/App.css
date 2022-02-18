@@ -3,5 +3,10 @@
   background-color: var(--light-gray);
 }
 .app__body {
-  height: auto;
+  height: 100%;
+  background-color: var(--light-gray);
+}
+
+.app__icon {
+  color: lightgrey;
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./UserAvatar.css";
 import Avatar from "@mui/material/Avatar";
 

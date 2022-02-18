@@ -1,8 +1,0 @@
-.userAvatar {
-  display: flex;
-  align-items: center;
-}
-
-.userAvatar > h5 {
-  margin-left: 5px;
-}
