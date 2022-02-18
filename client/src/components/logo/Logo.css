@@ -1,0 +1,9 @@
+.logo {
+  height: 2rem;
+  cursor: pointer;
+  object-fit: contain;
+}
+
+.logo:active {
+  opacity: 0.7;
+}

@@ -1,0 +1,38 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 20px;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid lightgrey;
+  z-index: 10;
+  background-color: white;
+  height: 60px;
+}
+
+.navbar__options {
+  margin-right: 60px;
+}
+
+.navbar__link {
+  text-decoration: none;
+  padding: 5px 10px;
+  color: var(--black);
+  text-transform: uppercase;
+}
+
+.navbar__link:hover {
+  opacity: 0.7;
+}
+
+.navbar__optionsUser {
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.navbar__optionsUser:hover {
+  background-color: var(--light-gray);
+  transition: 0.2s;
+  cursor: pointer;
+}
