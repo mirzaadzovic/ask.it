@@ -57,5 +57,5 @@ VALUES
 
 INSERT INTO questions (userId, questionText, questionDate)
 VALUES 
-(1, 'Je l ravno', '23-01-2022'),
-(2, 'đes ookoooo', '02-02-2022');
+(1, 'Je l ravno', '18-02-2022'),
+(2, 'đes ookoooo', '18-02-2022');

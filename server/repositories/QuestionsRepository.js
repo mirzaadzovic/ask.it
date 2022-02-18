@@ -1,4 +1,5 @@
 const db = require("../db");
+const QuestionDto = require("../dtos/QuestionDto");
 const UserDto = require("../dtos/UserDto");
 const QueryHelper = require("../helpers/QueryHelper");
 const Answer = require("../models/Answer");
@@ -29,7 +30,14 @@ class QuestionsRepository extends BaseRepository {
         if (!response) return res.status(400).send("Bad request");
 
         let questions = response.map((v) => v.toJSON());
-        questions = questions.map((q) => ({ ...q, user: new UserDto(q.user) }));
+        questions = questions.map((q) => ({
+          ...new QuestionDto(q),
+          user: new UserDto(q.user),
+        }));
+
+        const { userId } = req.query;
+        if (userId)
+          questions = questions.filter((q) => q.userId === parseInt(userId));
 
         res.status(200).json(questions);
       } catch (err) {
