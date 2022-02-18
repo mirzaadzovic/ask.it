@@ -33,6 +33,13 @@
   align-items: center;
 }
 
+.navbar__optionsUser > h5 {
+  margin-right: 7px;
+  color: var(--black);
+  font-size: small;
+  font-weight: 1000;
+}
+
 .navbar__optionsUser:hover {
   background-color: var(--light-gray);
   transition: 0.2s;
@@ -42,6 +49,9 @@
 @media (max-width: 600px) {
   .navbar__options {
     margin-right: 10px;
+  }
+  .navbar__optionsUser > h5 {
+    display: none;
   }
 }
 

@@ -1,3 +1,20 @@
 .question__text {
   padding: 5px;
+  border-radius: 5px;
+}
+
+.question__time {
+  text-decoration: none;
+  font-size: 11px;
+  color: rgb(172, 170, 170);
+  font-weight: 500;
+  cursor: pointer;
+  margin: 5px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+  display: inline;
+}
+
+.question__time:hover {
+  color: rgb(97, 97, 97);
+  transition: 0.2s;
 }

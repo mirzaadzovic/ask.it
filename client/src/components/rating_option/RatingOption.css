@@ -8,5 +8,11 @@
 }
 
 .ratingOption:nth-child(1) {
-  flex: 0.2;
+  margin-right: 30px;
+}
+
+@media (max-width: 350px) {
+  .ratingOption {
+    justify-content: center;
+  }
 }
