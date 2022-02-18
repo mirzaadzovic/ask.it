@@ -1,0 +1,16 @@
+.rating {
+  display: flex;
+}
+
+.rating__option:nth-child(1) {
+  flex: 0.2;
+}
+
+.rating__option {
+  display: flex;
+  align-items: center;
+}
+.rating__option > p {
+  font-size: small;
+  margin-left: 5px;
+}

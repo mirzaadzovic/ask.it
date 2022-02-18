@@ -1,7 +1,7 @@
 .questionForm {
   display: flex;
   flex-direction: column;
-  padding: 5px;
+  padding: 10px;
 }
 
 .questionForm > textarea {
@@ -9,4 +9,8 @@
   height: 80px !important;
   margin: 10px 0;
   background-color: var(--light-gray);
+}
+
+.questionForm > button:focus {
+  box-shadow: none !important;
 }

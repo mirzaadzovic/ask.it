@@ -4,6 +4,7 @@
 }
 .app__body {
   background-color: var(--light-gray);
+  padding-bottom: 10px;
 }
 
 .app__icon {
@@ -13,6 +14,8 @@
 .app__card {
   background-color: white !important;
   border-radius: 5px;
-  box-shadow: 2px 5px 10px 2px rgba(0, 0, 0, 0.1);
-  margin: 5px 0px;
+  box-shadow: 5px 5px 8px -2px rgba(0, 0, 0, 0.1);
+  margin: 10px 0px;
+  border: 1px solid lightgrey;
+  padding: 15px !important;
 }

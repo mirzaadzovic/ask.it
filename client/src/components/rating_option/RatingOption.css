@@ -1,0 +1,12 @@
+.ratingOption {
+  display: flex;
+  align-items: center;
+}
+.ratingOption > p {
+  font-size: small;
+  margin-left: 5px;
+}
+
+.ratingOption:nth-child(1) {
+  flex: 0.2;
+}
