@@ -1,9 +1,42 @@
 .home {
   display: flex;
   width: 100%;
+  justify-content: flex-end;
 }
 
 .home__left {
+  flex: 0.35;
+  position: fixed;
+  width: 30%;
+  left: 10px;
+  height: 80%;
   display: flex;
-  width: 100px;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.home__right {
+  flex: 0.65;
+  margin-right: 20px;
+}
+
+@media (max-width: 700px) {
+  .home__left {
+    width: 35%;
+  }
+  .home__right {
+    flex: 0.6;
+  }
+}
+
+@media (max-width: 500px) {
+  .home {
+    justify-content: center;
+  }
+  .home__left {
+    display: none;
+  }
+  .home__right {
+    flex: 1;
+    margin: 0;
+  }
 }

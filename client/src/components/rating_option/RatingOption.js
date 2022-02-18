@@ -1,6 +1,7 @@
 import { IconButton } from "@mui/material";
 import React, { useState } from "react";
 import "./RatingOption.css";
+import Tooltip from "@mui/material/Tooltip";
 
 const RatingOption = ({
   Icon,
@@ -9,6 +10,7 @@ const RatingOption = ({
   otherClicked,
   setOtherClicked,
   count,
+  tooltip,
 }) => {
   const style = { color: "var(--black)" };
 
@@ -19,9 +21,11 @@ const RatingOption = ({
 
   return (
     <div className="ratingOption">
-      <IconButton onClick={handleClick}>
-        <Icon className="app__icon" style={clicked ? style : null} />
-      </IconButton>
+      <Tooltip title={tooltip}>
+        <IconButton onClick={handleClick}>
+          <Icon className="app__icon" style={clicked ? style : null} />
+        </IconButton>
+      </Tooltip>
       <p>{clicked ? count + 1 : count}</p>
     </div>
   );

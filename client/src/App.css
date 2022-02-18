@@ -11,6 +11,14 @@
   color: rgb(167, 167, 167);
 }
 
+.app__title {
+  color: rgb(109, 109, 109);
+  padding: 10px;
+  text-transform: uppercase;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+  background-color: transparent;
+  border-bottom: 1px solid lightgray;
+}
 .app__card {
   background-color: white !important;
   border-radius: 5px;

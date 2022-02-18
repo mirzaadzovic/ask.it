@@ -1,6 +1,17 @@
+.question__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .question__text {
   padding: 5px;
   border-radius: 5px;
+}
+
+.question__text-footer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .question__time {

@@ -1,0 +1,25 @@
+.userTop5 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.userTop5__avatar {
+  height: 2rem;
+  width: 2rem;
+}
+
+.userTop5__left {
+  display: flex;
+  align-items: center;
+}
+
+.userTop5__left > p {
+  margin-right: 10px;
+}
+
+.userTop5:last-child {
+  border-bottom: none;
+}

@@ -3,7 +3,7 @@ import Question from "../question/Question";
 import QuestionForm from "../question__form/QuestionForm";
 import "./QuestionsContainer.css";
 
-const QuestionsContainer = () => {
+const QuestionsContainer = ({ userId = null }) => {
   return (
     <div className="questionsContainer">
       <QuestionForm />

@@ -18,6 +18,7 @@ const Rating = () => {
         otherClicked={dislike}
         setOtherClicked={setDislike}
         count={43}
+        tooltip={"Like"}
       />
       <RatingOption
         Icon={ThumbDownIcon}
@@ -26,6 +27,7 @@ const Rating = () => {
         otherClicked={like}
         setOtherClicked={setLike}
         count={23}
+        tooltip={"Dislike"}
       />
     </div>
   );
