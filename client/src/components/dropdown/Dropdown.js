@@ -11,17 +11,23 @@ const Dropdown = ({ close }) => {
   return (
     <div className="dropdown card">
       <ul className="list-group list-group-flush ">
-        <li onClick={close} className="dropdown__item list-group-item">
-          <PersonIcon className="dropdown__icon" />
-          <Link to="my-profile">My profile</Link>
+        <li onClick={close} className="list-group-item">
+          <Link className="dropdown__item" to="my-profile">
+            <PersonIcon className="dropdown__icon" />
+            <p>My profile</p>
+          </Link>
         </li>
-        <li onClick={close} className="dropdown__item list-group-item">
-          <QuizIcon className="dropdown__icon" />
-          <Link to="my-questions">My questions</Link>
+        <li onClick={close} className="list-group-item">
+          <Link className="dropdown__item" to="my-questions">
+            <QuizIcon className="dropdown__icon" />
+            <p>My questions</p>
+          </Link>
         </li>
-        <li onClick={close} className="dropdown__item list-group-item">
-          <LogoutIcon className="dropdown__icon" />
-          <Link to="/">Logout</Link>
+        <li onClick={close} className="list-group-item">
+          <Link className="dropdown__item" to="/">
+            <LogoutIcon className="dropdown__icon" />
+            <p>Logout</p>
+          </Link>
         </li>
       </ul>
     </div>

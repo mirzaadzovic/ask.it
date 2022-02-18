@@ -8,18 +8,23 @@
 }
 
 .dropdown__item {
+  padding: 10px;
   background-color: white;
   display: flex;
   font-size: medium;
   align-items: center;
-}
-
-.dropdown__item > a {
   text-decoration: none;
-  color: var(--black);
 }
 
-.dropdown__item:hover {
+.dropdown__item > p {
+  color: var(--black);
+  width: 100%;
+}
+.dropdown li {
+  padding: 0 !important;
+}
+.dropdown li:hover,
+.dropdown li:hover > .dropdown__item {
   cursor: pointer;
   background-color: var(--light-gray);
 }
