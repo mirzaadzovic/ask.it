@@ -11,6 +11,9 @@ router.get("/:id", answers.getById());
 // @POST
 router.post("/", answers.post());
 
+// @UPDATE
+router.put("/:id", answers.update());
+
 // @DELETE
 router.delete("/:id", answers.delete());
 

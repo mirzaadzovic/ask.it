@@ -1,3 +1,4 @@
+const AnswerReactionsRepository = require("./AnswerReactionsRepository.js");
 const AnswersRepository = require("./AnswersRepository.js");
 const QuestionsRepository = require("./QuestionsRepository.js");
 const ReactionsRepository = require("./ReactionsRepository.js");
@@ -10,6 +11,7 @@ class UnitOfWork {
     this.questions = new QuestionsRepository();
     this.users = new UsersRepository();
     this.answers = new AnswersRepository();
+    this.answerReactions = new AnswerReactionsRepository();
     this.reactions = new ReactionsRepository();
   }
 }

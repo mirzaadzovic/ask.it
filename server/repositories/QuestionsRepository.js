@@ -1,6 +1,6 @@
 const db = require("../db");
 const UserDto = require("../dtos/UserDto");
-const QueryHelper = require("../Helpers/QueryHelper");
+const QueryHelper = require("../helpers/QueryHelper");
 const Answer = require("../models/Answer");
 const Question = require("../models/Question");
 const User = require("../models/User");

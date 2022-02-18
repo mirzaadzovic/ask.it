@@ -3,11 +3,11 @@ CREATE DATABASE ask_it;
 
 CREATE TABLE users(
     userId BIGSERIAL CONSTRAINT pk_users PRIMARY KEY,
-    email VARCHAR(30),
-    firstName VARCHAR(30),
-    lastName VARCHAR(30),
-    passwordHash TEXT,
-    passwordSalt TEXT,
+    email VARCHAR(30) NOT NULL UNIQUE,
+    firstName VARCHAR(30) NOT NULL,
+    lastName VARCHAR(30) NOT NULL,
+    passwordHash TEXT NOT NULL,
+    passwordSalt TEXT NOT NULL,
     registrationDate timestamp with time zone,
     avatarUrl TEXT
 );
@@ -21,13 +21,13 @@ CREATE TABLE questions(
 );
 
 CREATE TABLE answers(
-    questionId INTEGER, 
-    userId INTEGER, 
+    answerId BIGSERIAL CONSTRAINT PK_answers PRIMARY KEY,
+    questionId INTEGER NOT NULL, 
+    userId INTEGER NOT NULL, 
     answerText TEXT NOT NULL,
     answerDate timestamp with time zone,
     CONSTRAINT FK_answers_question FOREIGN KEY(questionId) REFERENCES questions(questionId),
-    CONSTRAINT FK_answers_user FOREIGN KEY(userId) REFERENCES users(userId),
-    CONSTRAINT pk_answers PRIMARY KEY(questionId, userId) 
+    CONSTRAINT FK_answers_user FOREIGN KEY(userId) REFERENCES users(userId)
 );
 
 CREATE TABLE reactions(
@@ -38,6 +38,16 @@ CREATE TABLE reactions(
     CONSTRAINT FK_reactions_user FOREIGN KEY(userId) REFERENCES users(userId),
     CONSTRAINT FK_reactions_question FOREIGN KEY(questionId) REFERENCES questions(questionId),
     CONSTRAINT pk_reactions PRIMARY KEY(userId, questionId)
+);
+
+CREATE TABLE answerReactions(
+    userId INTEGER, 
+    answerId INTEGER, 
+    isLike BOOLEAN NOT NULL,
+    reactionDate timestamp with time zone,
+    CONSTRAINT FK_areactions_user FOREIGN KEY(userId) REFERENCES users(userId),
+    CONSTRAINT FK_areactions_question FOREIGN KEY(answerId) REFERENCES answers(answerId),
+    CONSTRAINT pk_areactions PRIMARY KEY(userId, answerId)
 );
 
 INSERT INTO users (email, firstName, lastName, registrationDate)
