@@ -1,0 +1,27 @@
+.answerForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.answerForm__input {
+  display: flex;
+  align-items: center;
+}
+.answerForm__input > textarea {
+  resize: none;
+  height: 60px !important;
+  margin: 10px 0;
+  background-color: var(--light-gray);
+}
+
+.answerForm__avatar {
+  height: 2rem;
+  width: 2rem;
+  margin-right: 10px;
+}
+
+@media (max-width: 500px) {
+  .answerForm__avatar {
+    display: none !important;
+  }
+}

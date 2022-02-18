@@ -17,6 +17,7 @@ const QuestionForm = () => {
         type="submit"
         className="btn btn-primary"
         onClick={(e) => e.preventDefault()}
+        disabled={!text}
       >
         Post
       </button>

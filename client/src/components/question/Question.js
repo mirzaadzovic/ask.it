@@ -4,6 +4,7 @@ import UserAvatar from "../user_avatar/UserAvatar";
 import ReactTimeAgo from "react-time-ago";
 import "./Question.css";
 import { Link } from "react-router-dom";
+import AnswerForm from "../answer_form/AnswerForm";
 
 const Question = () => {
   return (
@@ -20,6 +21,7 @@ const Question = () => {
       </p>
 
       <Rating />
+      <AnswerForm />
     </div>
   );
 };

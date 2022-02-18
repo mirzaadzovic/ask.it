@@ -19,3 +19,9 @@
   border: 1px solid lightgrey;
   padding: 15px !important;
 }
+
+.app__header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}

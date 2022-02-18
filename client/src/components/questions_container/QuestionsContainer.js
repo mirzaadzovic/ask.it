@@ -11,6 +11,10 @@ const QuestionsContainer = () => {
         <Question />
         <Question />
         <Question />
+        <Question />
+        <Question />
+        <Question />
+        <Question />
       </div>
     </div>
   );

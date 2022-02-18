@@ -11,6 +11,6 @@
   background-color: var(--light-gray);
 }
 
-.questionForm > button:focus {
+button:focus {
   box-shadow: none !important;
 }
