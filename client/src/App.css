@@ -18,6 +18,9 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
   background-color: transparent;
   border-bottom: 1px solid lightgray;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .app__card {
   background-color: white !important;

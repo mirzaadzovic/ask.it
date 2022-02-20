@@ -8,8 +8,8 @@
   flex: 0.35;
   position: fixed;
   width: 30%;
-  left: 10px;
-  height: 80%;
+  left: 20px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -21,10 +21,12 @@
 
 @media (max-width: 700px) {
   .home__left {
-    width: 35%;
+    width: 40%;
+    left: 0;
   }
   .home__right {
-    flex: 0.6;
+    flex: 0.55;
+    margin: 0;
   }
 }
 

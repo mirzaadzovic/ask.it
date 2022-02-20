@@ -10,7 +10,3 @@
   margin: 10px 0;
   background-color: var(--light-gray);
 }
-
-button:focus {
-  box-shadow: none !important;
-}

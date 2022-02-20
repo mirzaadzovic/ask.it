@@ -10,9 +10,3 @@
 .ratingOption:nth-child(1) {
   margin-right: 30px;
 }
-
-@media (max-width: 350px) {
-  .ratingOption {
-    justify-content: center;
-  }
-}

@@ -1,17 +1,11 @@
 import React from "react";
-import UserTop3 from "../user_top3/UserTop3";
+import topHOC from "../top_hoc/TopHoc";
+import UserAvatar from "../user_avatar/UserAvatar";
 import "./MostAnswers.css";
 
 const MostAnswers = () => {
-  const users = [1, 2, 3];
-  return (
-    <div className="mostAnswers app__card">
-      <p className="app__title">Top 3 responders</p>
-      {users.map((u, idx) => {
-        return <UserTop3 key={idx} rating={idx + 1} />;
-      })}
-    </div>
-  );
+  const Component = topHOC(UserAvatar, [16, 13, 8], "Top 3 responders");
+  return <Component />;
 };
 
 export default MostAnswers;
