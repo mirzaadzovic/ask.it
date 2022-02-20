@@ -40,7 +40,6 @@
 
 .app__questions {
   flex: 0.75;
-  flex-shrink: 0.5;
   margin: 0 auto;
 }
 

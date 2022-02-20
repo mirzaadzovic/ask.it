@@ -5,7 +5,7 @@ import "./QuestionsContainer.css";
 
 const QuestionsContainer = ({ userId = null }) => {
   return (
-    <div className="questionsContainer">
+    <div className="questionsContainer app__questions">
       {!userId && <QuestionForm />}
       <div className="questionsContainer__questions">
         <Question />
@@ -16,6 +16,7 @@ const QuestionsContainer = ({ userId = null }) => {
         <Question />
         <Question />
       </div>
+      <button className="btn btn-primary">Load more</button>
     </div>
   );
 };

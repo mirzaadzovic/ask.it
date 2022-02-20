@@ -18,13 +18,11 @@ const AnswerForm = () => {
           onChange={(e) => setText(e.target.value)}
         />
       </div>
-      <button
-        className="btn btn-primary"
-        onClick={(e) => e.preventDefault()}
-        disabled={!text}
-      >
-        Answer
-      </button>
+      {text && (
+        <button className="btn btn-primary" onClick={(e) => e.preventDefault()}>
+          Send Answer
+        </button>
+      )}
     </form>
   );
 };

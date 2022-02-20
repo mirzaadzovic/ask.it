@@ -1,4 +1,9 @@
 .questionsContainer {
-  margin: 5px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.questionsContainer > button {
+  width: 150px;
+  align-self: center;
 }
