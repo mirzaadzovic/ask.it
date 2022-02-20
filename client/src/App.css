@@ -5,6 +5,7 @@
 .app__body {
   background-color: var(--light-gray);
   padding-bottom: 10px;
+  display: flex;
 }
 
 .app__icon {
@@ -36,3 +37,15 @@
   top: 0;
   z-index: 10;
 }
+
+.app__questions {
+  flex: 0.75;
+  flex-shrink: 0.5;
+  margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+  .app__questions {
+    flex: 1;
+  }
+} ;

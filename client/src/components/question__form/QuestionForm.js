@@ -19,7 +19,7 @@ const QuestionForm = () => {
         onClick={(e) => e.preventDefault()}
         disabled={!text}
       >
-        Post
+        Ask
       </button>
     </form>
   );

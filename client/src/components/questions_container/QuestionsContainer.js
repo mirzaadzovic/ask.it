@@ -6,7 +6,7 @@ import "./QuestionsContainer.css";
 const QuestionsContainer = ({ userId = null }) => {
   return (
     <div className="questionsContainer">
-      <QuestionForm />
+      {!userId && <QuestionForm />}
       <div className="questionsContainer__questions">
         <Question />
         <Question />

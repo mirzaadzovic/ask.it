@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { selectOpenDropdown } from "./redux/reducers/dropdownReducer";
 import { closeDropdown } from "./redux/actions/dropdownActions";
 import Home from "./pages/home/Home";
+import MyQuestions from "./pages/my_questions/MyQuestions";
 
 function App({ displayDropdown, close }) {
   return (
@@ -18,6 +19,7 @@ function App({ displayDropdown, close }) {
         <div className="app__body">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="my-questions" element={<MyQuestions />} />
           </Routes>
         </div>
       </div>
