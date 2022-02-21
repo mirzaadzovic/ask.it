@@ -6,8 +6,13 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { closeDropdown } from "../../redux/actions/dropdownActions";
+import { logout } from "../../redux/actions/authActions";
 
-const Dropdown = ({ close }) => {
+const Dropdown = ({ close, logoutUser }) => {
+  const onLogout = () => {
+    close();
+    logoutUser();
+  };
   return (
     <div className="dropdown card">
       <ul className="list-group list-group-flush ">
@@ -23,7 +28,7 @@ const Dropdown = ({ close }) => {
             <p>My questions</p>
           </Link>
         </li>
-        <li onClick={close} className="list-group-item">
+        <li onClick={onLogout} className="list-group-item">
           <Link className="dropdown__item" to="/">
             <LogoutIcon className="dropdown__icon" />
             <p>Logout</p>
@@ -38,6 +43,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     close: () => {
       dispatch(closeDropdown());
+    },
+    logoutUser: () => {
+      dispatch(logout());
     },
   };
 };

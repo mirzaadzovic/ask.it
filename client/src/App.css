@@ -73,6 +73,11 @@
   color: red;
   margin-bottom: 5px;
 }
+
+.app__authForm--error {
+  text-align: center;
+}
+
 @media (max-width: 600px) {
   .app__questions {
     flex: 1;

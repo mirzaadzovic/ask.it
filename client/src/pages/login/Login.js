@@ -1,19 +1,29 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../components/logo/Logo";
 import "./Login.css";
 import { useForm } from "react-hook-form";
-import { loggedInUser, login } from "../../redux/actions/authActions";
-import { selectUser } from "../../redux/reducers/authReducer";
+import { login, resetUser } from "../../redux/actions/authActions";
+import {
+  selectAuthMessage,
+  selectIsError,
+  selectUser,
+} from "../../redux/reducers/authReducer";
 import { connect } from "react-redux";
 
-const Login = ({ handleLogin }) => {
+const Login = ({ handleLogin, isError, message, user, reset }) => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user]);
 
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -27,6 +37,9 @@ const Login = ({ handleLogin }) => {
         })}
       >
         <h2>Login</h2>
+        {isError && (
+          <p className="app__authForm--error app__error">{message}</p>
+        )}
         <input
           className="form-control"
           type="email"
@@ -66,11 +79,14 @@ const Login = ({ handleLogin }) => {
 const mapStateToProps = (state) => {
   return {
     user: selectUser(state),
+    isError: selectIsError(state),
+    message: selectAuthMessage(state),
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     handleLogin: (data) => dispatch(login(data)),
+    reset: () => dispatch(resetUser()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

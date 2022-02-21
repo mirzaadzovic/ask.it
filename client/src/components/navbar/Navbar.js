@@ -8,9 +8,12 @@ import { toggleDropdown } from "../../redux/actions/dropdownActions";
 import { Avatar } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import PersonIcon from "@mui/icons-material/Person";
-import { selectUser } from "../../redux/reducers/authReducer";
+import {
+  selectUser,
+  selectUserFullName,
+} from "../../redux/reducers/authReducer";
 
-const Navbar = ({ toggle, user }) => {
+const Navbar = ({ toggle, user, name }) => {
   return (
     <div className="navbar">
       <Link className="navbar__logo" to="/">
@@ -30,8 +33,8 @@ const Navbar = ({ toggle, user }) => {
           </div>
         ) : (
           <div className="navbar__optionsUser" onClick={(e) => toggle(e)}>
-            <h5>username</h5>
-            <Avatar src="https://is1-ssl.mzstatic.com/image/thumb/Music5/v4/d3/33/f9/d333f96c-0c6b-b07c-ff59-700baac2cbc6/C6153D5A-E593-11E4-ADD3-9225ABE918F9.jpg/1200x1200bf-60.jpg" />
+            <h5>{name}</h5>
+            <Avatar src={user.avatarUrl} />
             <ArrowDropDownIcon className="app__icon" />
           </div>
         )}
@@ -42,6 +45,7 @@ const Navbar = ({ toggle, user }) => {
 const mapStateToProps = (state) => {
   return {
     user: selectUser(state),
+    name: selectUserFullName(state),
   };
 };
 const mapDispatchToProps = (dispatch) => {

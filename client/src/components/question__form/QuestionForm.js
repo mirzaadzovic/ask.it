@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/reducers/authReducer";
 import UserAvatar from "../user_avatar/UserAvatar";
 import "./QuestionForm.css";
 
 const QuestionForm = () => {
+  const user = useSelector(selectUser);
   const [text, setText] = useState("");
   return (
     <form className="questionForm app__card">
-      <UserAvatar />
+      <UserAvatar user={user} />
       <textarea
         className="form-control"
         placeholder="Ask your question..."

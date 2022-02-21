@@ -1,4 +1,9 @@
-import { RESET_USER, SET_LOADING, SET_USER } from "../actions/authActions";
+import {
+  RESET_USER,
+  SET_LOADING,
+  SET_LOGIN_ERROR,
+  SET_USER,
+} from "../actions/authActions";
 
 const initialState = {
   user: null,
@@ -9,6 +14,8 @@ const initialState = {
 };
 
 export const selectUser = (state) => state.auth.user;
+export const selectUserFullName = (state) =>
+  `${state.auth.user?.firstName} ${state.auth.user?.lastName}`;
 export const selectIsError = (state) => state.auth.isError;
 export const selectIsSuccess = (state) => state.auth.isSuccess;
 export const selectIsLoading = (state) => state.auth.isLoading;
@@ -28,6 +35,12 @@ const authReducer = (state = initialState, action) => {
         user: action.payload,
         isSuccess: true,
         message: "Logged in ",
+      };
+    case SET_LOGIN_ERROR:
+      return {
+        ...initialState,
+        isError: true,
+        message: "Wrong username or password",
       };
     case RESET_USER:
       return initialState;
