@@ -10,6 +10,7 @@ import {
   selectUser,
 } from "../../redux/reducers/authReducer";
 import { connect } from "react-redux";
+import { resetQuestions } from "../../redux/actions/questionsActions";
 
 const Login = ({ handleLogin, isError, message, user, reset }) => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const Login = ({ handleLogin, isError, message, user, reset }) => {
 
   useEffect(() => {
     if (user) navigate("/");
+    return () => reset();
   }, [user, navigate]);
 
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -86,7 +88,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleLogin: (data) => dispatch(login(data)),
-    reset: () => dispatch(resetUser()),
+    reset: () => dispatch(resetQuestions()),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

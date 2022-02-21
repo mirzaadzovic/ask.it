@@ -2,8 +2,8 @@ import {
   ADD_QUESTION,
   DELETE_QUESTION,
   LOADING_QUESTIONS,
+  RESET_QUESTIONS,
   SET_QUESTIONS,
-  LOAD_MORE_QUESTIONS,
 } from "../actions/questionsActions";
 
 const initialState = {
@@ -38,6 +38,8 @@ const questionsReducer = (state = initialState, action) => {
         ...state,
         loading: true,
       };
+    case RESET_QUESTIONS:
+      return initialState;
     default:
       return state;
   }

@@ -22,9 +22,7 @@ export default class APIService {
   };
 
   static post = async (route, body) => {
-    const response = await axios
-      .post(route, body, { withCredentials: true })
-      .catch((err) => null);
+    const response = await axios.post(route, body).catch((err) => null);
 
     if (response?.status === 201) {
       const data = response.data;
@@ -33,16 +31,21 @@ export default class APIService {
   };
 
   static put = async (route, data) => {
-    const response = await axios
-      .put(`${route}/${data.id}`, data, {
-        withCredentials: true,
-        data: data,
-      })
-      .catch((err) => null);
+    const response = await axios.put(route, data).catch((err) => null);
 
     if (response?.status === 200) {
       const chat = response.data;
       return chat;
+    }
+    return null;
+  };
+
+  static delete = async (route, id) => {
+    const response = await axios.delete(route).catch((err) => null);
+
+    if (response?.status === 200) {
+      const messages = response.data;
+      return messages;
     }
     return null;
   };

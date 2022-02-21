@@ -18,7 +18,7 @@
 }
 .home__right {
   flex: 0.6;
-  margin-right: 30px;
+  margin-right: 50px;
 }
 
 @media (max-width: 700px) {

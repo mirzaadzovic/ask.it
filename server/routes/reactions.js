@@ -1,4 +1,5 @@
 const express = require("express");
+const authMiddleware = require("../middlewares/auth.js");
 const { reactions } = require("../repositories/UnitOfWork.js");
 const router = express.Router();
 
@@ -9,12 +10,12 @@ router.get("/", reactions.getAll());
 router.get("/:id", reactions.getById());
 
 // @POST
-router.post("/", reactions.post());
+router.post("/", authMiddleware, reactions.post());
 
 // @UPDATE
-router.put("/:id", reactions.update());
+router.put("/:id", authMiddleware, reactions.update());
 
 // @DELETE
-router.delete("/:id", reactions.delete());
+router.delete("/:id", authMiddleware, reactions.delete());
 
 module.exports = router;

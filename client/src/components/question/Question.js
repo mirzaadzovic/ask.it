@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 const Question = ({ question }) => {
   const loggedInUser = useSelector(selectUser);
 
-  const { questionId, questionDate, questionText, user } = question;
+  const { questionId, questionDate, questionText, user, reactions } = question;
 
   return (
     <div className="question app__card">
@@ -41,7 +41,7 @@ const Question = ({ question }) => {
         <ReactTimeAgo date={new Date(questionDate)} />
       </Link>
       <p className="question__text">{questionText}</p>
-      <Rating />
+      <Rating reactions={reactions} questionId={questionId} />
       {loggedInUser && <AnswerForm />}
     </div>
   );

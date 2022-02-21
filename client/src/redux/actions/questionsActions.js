@@ -39,16 +39,16 @@ export const deleteQuestion = (id) => {
   };
 };
 
-export const LOAD_MORE_QUESTIONS = "LOAD_MORE_QUESTIONS";
-export const loadMoreQuestions = (data) => {
+export const RESET_QUESTIONS = "RESET_QUESTIONS";
+export const resetQuestions = () => {
   return {
-    type: LOAD_MORE_QUESTIONS,
-    payload: data,
+    type: RESET_QUESTIONS,
   };
 };
 
 export const getQuestions = (pages) => {
   return async (dispatch) => {
+    dispatch(loadingQuestions());
     const questions = await APIService.getAll("/questions", { pages }).catch(
       (err) => null
     );

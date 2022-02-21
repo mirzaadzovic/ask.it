@@ -1,9 +1,11 @@
 const db = require("../db");
 const QuestionDto = require("../dtos/QuestionDto");
+const ReactionDto = require("../dtos/ReactionDto");
 const UserDto = require("../dtos/UserDto");
 const QueryHelper = require("../helpers/QueryHelper");
 const Answer = require("../models/Answer");
 const Question = require("../models/Question");
+const Reaction = require("../models/Reaction");
 const User = require("../models/User");
 const BaseRepository = require("./BaseRepository");
 
@@ -23,6 +25,7 @@ class QuestionsRepository extends BaseRepository {
               as: "user",
             },
             { model: Answer, as: "answers" },
+            { model: Reaction, as: "reactions" },
           ],
           order: [["questiondate", "DESC"]],
         }).catch((err) => console.log(err.toString()));
@@ -33,6 +36,7 @@ class QuestionsRepository extends BaseRepository {
         questions = questions.map((q) => ({
           ...new QuestionDto(q),
           user: new UserDto(q.user),
+          reactions: new ReactionDto(q.reactions),
         }));
 
         const { userId } = req.query;
@@ -40,10 +44,10 @@ class QuestionsRepository extends BaseRepository {
           questions = questions.filter((q) => q.userId === parseInt(userId));
 
         questions = questions.slice(count * page, count * page + count);
-        console.log(questions);
 
         res.status(200).json(questions);
       } catch (err) {
+        console.log(err.toString());
         res.status(500).send(err.toString());
       }
     };

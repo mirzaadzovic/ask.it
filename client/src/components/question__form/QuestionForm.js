@@ -5,10 +5,11 @@ import {
   postQuestion,
 } from "../../redux/actions/questionsActions";
 import { selectUser } from "../../redux/reducers/authReducer";
+import { selectQuestionsLoading } from "../../redux/reducers/questionsReducer";
 import UserAvatar from "../user_avatar/UserAvatar";
 import "./QuestionForm.css";
 
-const QuestionForm = ({ user, askQuestion }) => {
+const QuestionForm = ({ user, askQuestion, isLoading }) => {
   const [text, setText] = useState("");
   const handleClick = () => {
     const question = { questiontext: text, userid: user.userId };
@@ -28,7 +29,7 @@ const QuestionForm = ({ user, askQuestion }) => {
         type="submit"
         className="btn btn-primary"
         onClick={() => handleClick()}
-        disabled={!text}
+        disabled={!text || isLoading}
       >
         Ask Question
       </button>
@@ -39,6 +40,7 @@ const QuestionForm = ({ user, askQuestion }) => {
 const mapStateToProps = (state) => {
   return {
     user: selectUser(state),
+    isLoading: selectQuestionsLoading(state),
   };
 };
 

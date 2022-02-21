@@ -8,4 +8,5 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   object-fit: contain;
+  margin: 0 auto;
 }

@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { connect, useSelector } from "react-redux";
 import { getQuestions } from "../../redux/actions/questionsActions";
 import { selectUser } from "../../redux/reducers/authReducer";
-import { selectQuestions } from "../../redux/reducers/questionsReducer";
+import {
+  selectQuestions,
+  selectQuestionsLoading,
+} from "../../redux/reducers/questionsReducer";
+import LoadingSpinner from "../loading/Loading";
 import Question from "../question/Question";
 import QuestionForm from "../question__form/QuestionForm";
 import "./QuestionsContainer.css";
@@ -12,6 +16,7 @@ const QuestionsContainer = ({
   user,
   fetchQuestions,
   questions,
+  isLoading,
 }) => {
   const [pages, setPages] = useState(0);
   // const [questions, setQuestions] = useState(null);
@@ -27,9 +32,13 @@ const QuestionsContainer = ({
           <Question key={idx} question={q} />
         ))}
       </div>
-      <button className="btn btn-primary" onClick={() => setPages(pages + 1)}>
-        Load more
-      </button>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <button className="btn btn-primary" onClick={() => setPages(pages + 1)}>
+          Load more
+        </button>
+      )}
     </div>
   );
 };
@@ -38,6 +47,7 @@ const mapStateToProps = (state) => {
   return {
     user: selectUser(state),
     questions: selectQuestions(state),
+    isLoading: selectQuestionsLoading(state),
   };
 };
 
