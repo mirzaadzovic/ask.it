@@ -17,16 +17,13 @@ const RatingOption = ({
   user,
   questionId,
   isLike,
+  setOtherCount,
 }) => {
   const style = { color: "var(--black)" };
   const [increment, setIncrement] = useState(0);
 
-  const handleClick = async () => {
-    const data = {
-      islike: isLike,
-      userid: user.userId,
-      questionid: questionId,
-    };
+  const submit = async (data) => {
+    // Check which method will be executed
     if (!clicked && !otherClicked) {
       const reaction = await APIService.post("/reactions", data);
       setIncrement(increment + 1);
@@ -41,7 +38,25 @@ const RatingOption = ({
         question: questionId,
         userid: user.userId,
       });
+
+      // Doing UI like/dislike count updates
+      if (clicked) {
+        setOtherCount((prev) => prev + 1);
+        setIncrement(increment - 1);
+      } else {
+        setOtherCount((prev) => prev - 1);
+        setIncrement(increment + 1);
+      }
     }
+  };
+  const handleClick = async () => {
+    const data = {
+      islike: isLike,
+      userid: user.userId,
+      questionid: questionId,
+    };
+
+    await submit(data);
 
     setClicked(!clicked);
     if (otherClicked) {

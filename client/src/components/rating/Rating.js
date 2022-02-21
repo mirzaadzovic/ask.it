@@ -24,6 +24,8 @@ const Rating = ({
 
   const [like, setLike] = useState(likeInitial);
   const [dislike, setDislike] = useState(dislikeInitial);
+  const [dislikeCount, setDislikeCount] = useState(dislikes);
+  const [likeCount, setLikeCount] = useState(likes);
 
   return (
     <div className="rating">
@@ -33,10 +35,11 @@ const Rating = ({
         setClicked={setLike}
         otherClicked={dislike}
         setOtherClicked={setDislike}
-        count={likes}
+        count={likeCount}
         tooltip={"Like"}
         questionId={questionId}
         isLike={true}
+        setOtherCount={setDislikeCount}
       />
       <RatingOption
         Icon={ThumbDownIcon}
@@ -44,10 +47,11 @@ const Rating = ({
         setClicked={setDislike}
         otherClicked={like}
         setOtherClicked={setLike}
-        count={dislikes}
+        count={dislikeCount}
         tooltip={"Dislike"}
         questionId={questionId}
         isLike={false}
+        setOtherCount={setLikeCount}
       />
     </div>
   );
