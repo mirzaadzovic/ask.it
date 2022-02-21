@@ -9,11 +9,14 @@ import { selectQuestionsLoading } from "../../redux/reducers/questionsReducer";
 import UserAvatar from "../user_avatar/UserAvatar";
 import "./QuestionForm.css";
 
-const QuestionForm = ({ user, askQuestion, isLoading }) => {
+const QuestionForm = ({ user, askQuestion, isLoading, setQuestions }) => {
   const [text, setText] = useState("");
-  const handleClick = () => {
+  const handleClick = async (e) => {
+    e.preventDefault();
     const question = { questiontext: text, userid: user.userId };
-    askQuestion(question, user);
+    const response = await askQuestion(question, user);
+    console.log(response);
+    setQuestions((prevState) => [response, ...prevState]);
     setText("");
   };
   return (
@@ -23,12 +26,14 @@ const QuestionForm = ({ user, askQuestion, isLoading }) => {
         className="form-control"
         placeholder="Ask your question..."
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          setText(e.target.value);
+        }}
       />
       <button
         type="submit"
         className="btn btn-primary"
-        onClick={() => handleClick()}
+        onClick={(e) => handleClick(e)}
         disabled={!text || isLoading}
       >
         Ask Question

@@ -10,9 +10,13 @@ import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import Tooltip from "@mui/material/Tooltip";
 import { selectUser } from "../../redux/reducers/authReducer";
-import { useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
+import {
+  deleteQuestion,
+  refreshQuestions,
+} from "../../redux/actions/questionsActions";
 
-const Question = ({ question }) => {
+const Question = ({ question, remove, setQuestions }) => {
   const loggedInUser = useSelector(selectUser);
 
   const { questionId, questionDate, questionText, user, reactions } = question;
@@ -30,7 +34,14 @@ const Question = ({ question }) => {
               </IconButton>
             </Tooltip>
             <Tooltip title={"Delete"}>
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  remove(questionId);
+                  setQuestions((prevstate) =>
+                    prevstate.filter((q) => q.questionId !== questionId)
+                  );
+                }}
+              >
                 <CloseIcon className="app__icon" />
               </IconButton>
             </Tooltip>
@@ -47,4 +58,13 @@ const Question = ({ question }) => {
   );
 };
 
-export default Question;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    remove: (questionId) => {
+      dispatch(deleteQuestion(questionId));
+      dispatch(refreshQuestions());
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Question);

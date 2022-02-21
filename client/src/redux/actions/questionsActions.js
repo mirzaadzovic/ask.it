@@ -32,7 +32,7 @@ export const editQuestion = (data) => {
 };
 
 export const DELETE_QUESTION = "DELETE_QUESTION";
-export const deleteQuestion = (id) => {
+export const removeQuestion = (id) => {
   return {
     type: DELETE_QUESTION,
     payload: id,
@@ -43,6 +43,13 @@ export const RESET_QUESTIONS = "RESET_QUESTIONS";
 export const resetQuestions = () => {
   return {
     type: RESET_QUESTIONS,
+  };
+};
+
+export const REFRESH_QUESTIONS = "REFRESH_QUESTIONS";
+export const refreshQuestions = () => {
+  return {
+    type: REFRESH_QUESTIONS,
   };
 };
 
@@ -66,6 +73,17 @@ export const postQuestion = (data, user) => {
       (err) => null
     );
     question.user = { ...user };
-    if (question) dispatch(addQuestion(question));
+    if (question) {
+      dispatch(addQuestion(question));
+      return question;
+    }
+  };
+};
+
+export const deleteQuestion = (questionId) => {
+  return async (dispatch) => {
+    await APIService.delete("/questions/" + questionId).catch((err) => null);
+    console.log("IDEE");
+    dispatch(removeQuestion(questionId));
   };
 };

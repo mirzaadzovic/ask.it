@@ -84,9 +84,27 @@ class QuestionsRepository extends BaseRepository {
         const response = await this.Model.create(req.body).catch((err) => null);
         if (!response) return res.status(400).send("Bad request");
 
-        res.status(201).json(new QuestionDto(response));
+        let question = new QuestionDto(response);
+        question.reactions = new ReactionDto(response.get().reactions);
+        res.status(201).json(question);
       } catch {
         res.status(500).send("Internal server error");
+      }
+    };
+  }
+  delete() {
+    return async (req, res) => {
+      try {
+        const { id } = req.params;
+
+        await Reaction.destroy({ where: { questionid: id } });
+        const entity = await Question.findByPk(id);
+        if (!entity) return res.status(404).send("Not found");
+
+        await entity.destroy();
+        res.status(204).send("Deleted");
+      } catch (err) {
+        res.status(500).send(err.toString());
       }
     };
   }

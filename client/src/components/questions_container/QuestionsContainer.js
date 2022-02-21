@@ -20,6 +20,7 @@ const QuestionsContainer = ({
   fetchQuestions,
   isLoading,
   reset,
+  questionsGlobal,
 }) => {
   const [pages, setPages] = useState(0);
   const [questions, setQuestions] = useState([]);
@@ -29,12 +30,16 @@ const QuestionsContainer = ({
     setQuestions([...questions, ...response]);
   }, [userId, pages, fetchQuestions, setQuestions]);
 
+  useEffect(() => {
+    if (pages) setQuestions(questionsGlobal);
+  }, [questionsGlobal]);
+
   return (
     <div className="questionsContainer app__questions">
-      {!userId && user && <QuestionForm />}
+      {!userId && user && <QuestionForm setQuestions={setQuestions} />}
       <div className="questionsContainer__questions">
         {questions?.map((q, idx) => (
-          <Question key={idx} question={q} />
+          <Question key={idx} question={q} setQuestions={setQuestions} />
         ))}
       </div>
       {isLoading ? (
@@ -52,6 +57,7 @@ const mapStateToProps = (state) => {
   return {
     user: selectUser(state),
     isLoading: selectQuestionsLoading(state),
+    questionsGlobal: selectQuestions(state),
   };
 };
 
