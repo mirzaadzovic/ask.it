@@ -27,7 +27,7 @@ app.use(`${API_ROUTE}/users`, users);
 app.use(`${API_ROUTE}/answers`, answers);
 app.use(`${API_ROUTE}/reactions`, reactions);
 app.use(`${API_ROUTE}/answer-reactions`, answerReactions);
-app.use(`/auth`, auth);
+app.use(`${API_ROUTE}/auth`, auth);
 
 // DB CONNECT
 db.authenticate()

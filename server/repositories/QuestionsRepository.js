@@ -14,9 +14,9 @@ class QuestionsRepository extends BaseRepository {
   getAll() {
     return async (req, res) => {
       try {
-        const load = req.query.load || 1;
+        const count = 5;
+        const page = req.query.pages || 1;
         const response = await this.Model.findAll({
-          limit: 20 * load,
           include: [
             {
               model: User,
@@ -38,6 +38,9 @@ class QuestionsRepository extends BaseRepository {
         const { userId } = req.query;
         if (userId)
           questions = questions.filter((q) => q.userId === parseInt(userId));
+
+        questions = questions.slice(count * page, count * page + count);
+        console.log(questions);
 
         res.status(200).json(questions);
       } catch (err) {
@@ -64,6 +67,19 @@ class QuestionsRepository extends BaseRepository {
         res.status(200).json(response);
       } catch (err) {
         res.status(500).send(err.toString());
+      }
+    };
+  }
+  post() {
+    return async (req, res) => {
+      try {
+        console.log(req.body);
+        const response = await this.Model.create(req.body).catch((err) => null);
+        if (!response) return res.status(400).send("Bad request");
+
+        res.status(201).json(new QuestionDto(response));
+      } catch {
+        res.status(500).send("Internal server error");
       }
     };
   }

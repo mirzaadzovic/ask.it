@@ -1,12 +1,20 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
+import {
+  addQuestion,
+  postQuestion,
+} from "../../redux/actions/questionsActions";
 import { selectUser } from "../../redux/reducers/authReducer";
 import UserAvatar from "../user_avatar/UserAvatar";
 import "./QuestionForm.css";
 
-const QuestionForm = () => {
-  const user = useSelector(selectUser);
+const QuestionForm = ({ user, askQuestion }) => {
   const [text, setText] = useState("");
+  const handleClick = () => {
+    const question = { questiontext: text, userid: user.userId };
+    askQuestion(question, user);
+    setText("");
+  };
   return (
     <form className="questionForm app__card">
       <UserAvatar user={user} />
@@ -19,7 +27,7 @@ const QuestionForm = () => {
       <button
         type="submit"
         className="btn btn-primary"
-        onClick={(e) => e.preventDefault()}
+        onClick={() => handleClick()}
         disabled={!text}
       >
         Ask Question
@@ -28,4 +36,16 @@ const QuestionForm = () => {
   );
 };
 
-export default QuestionForm;
+const mapStateToProps = (state) => {
+  return {
+    user: selectUser(state),
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    askQuestion: (question, user) => dispatch(postQuestion(question, user)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionForm);

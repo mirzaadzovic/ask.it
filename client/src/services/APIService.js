@@ -1,10 +1,9 @@
 import axios from "../axios/axios";
 
 export default class APIService {
-  apiPrefix = "/api/v1";
   static async getAll(route, params) {
     const response = await axios
-      .get(apiPrefix + route, { params: params })
+      .get(route, { params: params })
       .catch((err) => err);
 
     if (response.status === 200) return response.data;
@@ -13,9 +12,7 @@ export default class APIService {
   }
 
   static getById = async (route, id) => {
-    const response = await axios
-      .get(`${apiPrefix}${route}/${id}`)
-      .catch((err) => null);
+    const response = await axios.get(`${route}/${id}`).catch((err) => null);
 
     if (response?.status === 200) {
       const messages = response.data;
@@ -26,7 +23,7 @@ export default class APIService {
 
   static post = async (route, body) => {
     const response = await axios
-      .post(apiPrefix + route, body, { withCredentials: true })
+      .post(route, body, { withCredentials: true })
       .catch((err) => null);
 
     if (response?.status === 201) {
@@ -37,7 +34,7 @@ export default class APIService {
 
   static put = async (route, data) => {
     const response = await axios
-      .put(`${apiPrefix}${route}/${data.id}`, data, {
+      .put(`${route}/${data.id}`, data, {
         withCredentials: true,
         data: data,
       })

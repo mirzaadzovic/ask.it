@@ -1,13 +1,16 @@
 import { Avatar } from "@mui/material";
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { selectUser } from "../../redux/reducers/authReducer";
 import "./AnswerForm.css";
 
-const AnswerForm = () => {
+const AnswerForm = ({ user }) => {
   const [text, setText] = useState("");
   return (
     <form className="answerForm">
       <div className="answerForm__input">
         <Avatar
+          src={user.avatarUrl}
           className="answerForm__avatar"
           style={{ height: "2rem", width: "2rem" }}
         />
@@ -27,4 +30,10 @@ const AnswerForm = () => {
   );
 };
 
-export default AnswerForm;
+const mapStateToPros = (state) => {
+  return {
+    user: selectUser(state),
+  };
+};
+
+export default connect(mapStateToPros, null)(AnswerForm);
