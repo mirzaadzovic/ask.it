@@ -37,7 +37,7 @@ const Question = ({ question }) => {
           </div>
         )}
       </div>
-      <Link to="question/" className="question__time">
+      <Link to={`/question/${questionId}`} className="question__time">
         <ReactTimeAgo date={new Date(questionDate)} />
       </Link>
       <p className="question__text">{questionText}</p>

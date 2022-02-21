@@ -61,14 +61,17 @@ class QuestionsRepository extends BaseRepository {
           include: [
             { model: User, as: "user" },
             { model: Answer, as: "answers" },
+            { model: Reaction, as: "reactions" },
           ],
         }).catch((err) => null);
 
         if (!response) return res.status(404).send("Not found");
+        const question = new QuestionDto(response);
 
-        response.get().user = new UserDto(response.get().user);
+        question.user = new UserDto(response.get().user);
+        question.reactions = new ReactionDto(response.get().reactions);
 
-        res.status(200).json(response);
+        res.status(200).json(question);
       } catch (err) {
         res.status(500).send(err.toString());
       }
