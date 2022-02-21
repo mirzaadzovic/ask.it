@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import Logo from "../../components/logo/Logo";
 import "./Login.css";
 import { useForm } from "react-hook-form";
+import { loggedInUser, login } from "../../redux/actions/authActions";
+import { selectUser } from "../../redux/reducers/authReducer";
+import { connect } from "react-redux";
 
-const Login = () => {
+const Login = ({ handleLogin }) => {
   const {
     register,
     handleSubmit,
@@ -20,7 +23,7 @@ const Login = () => {
       <form
         className="app__authForm"
         onSubmit={handleSubmit(() => {
-          console.log(watch());
+          handleLogin(watch());
         })}
       >
         <h2>Login</h2>
@@ -60,5 +63,14 @@ const Login = () => {
     </div>
   );
 };
-
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+    user: selectUser(state),
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleLogin: (data) => dispatch(login(data)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -15,15 +15,31 @@
   margin-right: 60px;
 }
 
+.navbar__optionsLogin {
+  display: flex;
+}
+
+.navbar__option {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__icon {
+  color: var(--black);
+  margin-right: 5px;
+}
 .navbar__link {
   text-decoration: none;
   padding: 5px 10px;
   color: var(--black);
-  text-transform: uppercase;
+  align-items: center;
+  display: flex;
+  font-size: small;
 }
 
 .navbar__link:hover {
   opacity: 0.7;
+  color: var(--black);
 }
 
 .navbar__optionsUser {

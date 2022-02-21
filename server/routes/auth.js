@@ -14,7 +14,7 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     const response = await User.findOne({ where: { email } });
-    const user = response.get();
+    const user = response?.get();
 
     if (!user) return res.status(401).send("401 UNAUTHORIZED");
     const correctPassword = await bcrypt.compare(password, user.passwordhash);

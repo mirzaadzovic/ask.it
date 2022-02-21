@@ -9,23 +9,31 @@ import Home from "./pages/home/Home";
 import MyQuestions from "./pages/my_questions/MyQuestions";
 import Question from "./pages/question/Question";
 import Login from "./pages/login/Login";
+import Loading from "./pages/loading/Loading.js";
+import { selectIsLoading } from "./redux/reducers/authReducer";
 
-function App({ displayDropdown, close }) {
+function App({ displayDropdown, close, isLoading }) {
   return (
     <BrowserRouter>
       <div className="app" onClick={(e) => close(e)}>
-        <div className="app__header">
-          <Navbar />
-          {displayDropdown && <Dropdown />}
-        </div>
-        <div className="app__body">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="my-questions" element={<MyQuestions />} />
-            <Route path="/question/*" element={<Question />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </div>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <div className="app__header">
+              <Navbar />
+              {displayDropdown && <Dropdown />}
+            </div>
+            <div className="app__body">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="my-questions" element={<MyQuestions />} />
+                <Route path="/question/*" element={<Question />} />
+                <Route path="/login" element={<Login />} />
+              </Routes>
+            </div>
+          </>
+        )}
       </div>
     </BrowserRouter>
   );
@@ -33,6 +41,7 @@ function App({ displayDropdown, close }) {
 const mapStateToProps = (state) => {
   return {
     displayDropdown: selectOpenDropdown(state),
+    isLoading: selectIsLoading(state),
   };
 };
 
