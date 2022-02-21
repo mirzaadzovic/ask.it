@@ -17,12 +17,14 @@ class ReactionsRepository extends BaseRepository {
           questionid: id,
         },
       });
-      console.log("AAa", entity);
       if (!entity) return res.status(404).send("Not found");
 
       entity.islike = !entity.islike;
-      await entity.save();
-      res.status(200).json(entity);
+      console.log("AAa", entity.get());
+
+      let response = await entity.save();
+
+      res.status(200).json(response);
     };
   }
 
@@ -42,4 +44,5 @@ class ReactionsRepository extends BaseRepository {
     };
   }
 }
+
 module.exports = ReactionsRepository;

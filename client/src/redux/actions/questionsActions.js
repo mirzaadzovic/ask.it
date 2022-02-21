@@ -46,12 +46,14 @@ export const resetQuestions = () => {
   };
 };
 
-export const getQuestions = (pages) => {
+export const getQuestions = (pages, userId) => {
   return async (dispatch) => {
     dispatch(loadingQuestions());
-    const questions = await APIService.getAll("/questions", { pages }).catch(
-      (err) => null
-    );
+
+    const questions = await APIService.getAll("/questions", {
+      pages,
+      userId,
+    }).catch((err) => null);
 
     if (questions) dispatch(setQuestions(questions));
     return questions;

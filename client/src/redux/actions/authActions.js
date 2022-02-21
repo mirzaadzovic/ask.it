@@ -31,7 +31,6 @@ export const resetUser = () => {
 
 export const login = (data) => {
   return async (dispatch) => {
-    console.log(data);
     const { email, password } = data;
     dispatch(setLoading());
 

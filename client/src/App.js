@@ -10,9 +10,9 @@ import MyQuestions from "./pages/my_questions/MyQuestions";
 import Question from "./pages/question/Question";
 import Login from "./pages/login/Login";
 import Loading from "./pages/loading/Loading.js";
-import { selectIsLoading } from "./redux/reducers/authReducer";
+import { selectIsLoading, selectUser } from "./redux/reducers/authReducer";
 
-function App({ displayDropdown, close, isLoading }) {
+function App({ user, displayDropdown, close, isLoading }) {
   return (
     <BrowserRouter>
       <div className="app" onClick={(e) => close(e)}>
@@ -27,7 +27,10 @@ function App({ displayDropdown, close, isLoading }) {
             <div className="app__body">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="my-questions" element={<MyQuestions />} />
+                <Route
+                  path="my-questions"
+                  element={<MyQuestions userId={user.userId} />}
+                />
                 <Route path="/question/*" element={<Question />} />
                 <Route path="/login" element={<Login />} />
               </Routes>
@@ -42,6 +45,7 @@ const mapStateToProps = (state) => {
   return {
     displayDropdown: selectOpenDropdown(state),
     isLoading: selectIsLoading(state),
+    user: selectUser(state),
   };
 };
 
