@@ -43,6 +43,36 @@
   margin: 0 auto;
 }
 
+.app__authForm > input {
+  margin: 5px 0;
+}
+.app__authForm > button {
+  margin: 10px 0;
+}
+
+.app__authForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.app__authForm > h2 {
+  text-align: center;
+  margin: 20px;
+}
+
+.app__authForm > a {
+  text-decoration: none;
+  font-size: small;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.app__error {
+  font-size: x-small;
+  color: red;
+  margin-bottom: 5px;
+}
 @media (max-width: 600px) {
   .app__questions {
     flex: 1;
