@@ -5,10 +5,7 @@ import {
   resetQuestions,
 } from "../../redux/actions/questionsActions";
 import { selectUser } from "../../redux/reducers/authReducer";
-import {
-  selectQuestions,
-  selectQuestionsLoading,
-} from "../../redux/reducers/questionsReducer";
+import { selectQuestionsLoading } from "../../redux/reducers/questionsReducer";
 import LoadingSpinner from "../loading/Loading";
 import Question from "../question/Question";
 import QuestionForm from "../question__form/QuestionForm";
@@ -20,7 +17,6 @@ const QuestionsContainer = ({
   fetchQuestions,
   isLoading,
   reset,
-  questionsGlobal,
 }) => {
   const [pages, setPages] = useState(0);
   const [questions, setQuestions] = useState([]);
@@ -30,8 +26,18 @@ const QuestionsContainer = ({
     console.log("LOAD", userId);
     const response = await fetchQuestions(pages, userId);
     setQuestions([...questions, ...response]);
-    return () => setQuestions(...questions);
   }, [userId, pages, fetchQuestions, setQuestions]);
+
+  if (questions.length === 0)
+    return (
+      <center style={{ padding: "40px" }}>
+        {userId ? (
+          <p>No questions asked {user.firstName} my bro</p>
+        ) : (
+          <LoadingSpinner />
+        )}
+      </center>
+    );
 
   return (
     <div className="questionsContainer app__questions">
@@ -61,14 +67,12 @@ const mapStateToProps = (state) => {
   return {
     user: selectUser(state),
     isLoading: selectQuestionsLoading(state),
-    questionsGlobal: selectQuestions(state),
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchQuestions: (pages, userId) => dispatch(getQuestions(pages, userId)),
-    reset: () => dispatch(resetQuestions()),
   };
 };
 

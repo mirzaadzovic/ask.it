@@ -20,6 +20,7 @@ const QuestionForm = ({
   reload,
 }) => {
   const [text, setText] = useState("");
+
   const handleClick = async (e) => {
     e.preventDefault();
     const question = { questiontext: text, userid: user.userId };
@@ -28,6 +29,7 @@ const QuestionForm = ({
     const refresh = await reload();
     setQuestions(refresh);
   };
+
   return (
     <form className="questionForm app__card">
       <UserAvatar user={user} />

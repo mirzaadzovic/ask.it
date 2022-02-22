@@ -35,14 +35,11 @@ const Question = ({ question, remove, setQuestions, questions }) => {
     );
   };
 
-  useEffect(() => {
-    setText(questionText);
-    setTempText(text);
+  useEffect(async () => {
     return () => {
-      setTempText(questionText);
       setEdit(false);
     };
-  }, [loggedInUser, setEdit, questions]);
+  }, [loggedInUser, setEdit, questions, questionText]);
 
   return (
     <div className="question app__card">
