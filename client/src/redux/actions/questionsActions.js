@@ -8,6 +8,14 @@ export const setQuestions = (data) => {
   };
 };
 
+export const SET_QUESTIONS_ALL = "SET_QUESTIONS_ALL";
+export const setQuestionsAll = (data) => {
+  return {
+    type: SET_QUESTIONS_ALL,
+    payload: data,
+  };
+};
+
 export const ADD_QUESTION = "ADD_QUESTION";
 export const addQuestion = (data) => {
   return {
@@ -74,7 +82,7 @@ export const postQuestion = (data, user) => {
     );
     question.user = { ...user };
     if (question) {
-      dispatch(addQuestion(question));
+      // dispatch(addQuestion(question));
       return question;
     }
   };
@@ -83,7 +91,6 @@ export const postQuestion = (data, user) => {
 export const deleteQuestion = (questionId) => {
   return async (dispatch) => {
     await APIService.delete("/questions/" + questionId).catch((err) => null);
-    console.log("IDEE");
     dispatch(removeQuestion(questionId));
   };
 };

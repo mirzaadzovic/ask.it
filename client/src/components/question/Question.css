@@ -1,3 +1,7 @@
+.question {
+  animation: 0.2s linear fadein;
+}
+
 .question__header {
   display: flex;
   justify-content: space-between;
@@ -35,4 +39,15 @@
   height: 80px !important;
   margin: 10px 0;
   background-color: var(--light-gray);
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }

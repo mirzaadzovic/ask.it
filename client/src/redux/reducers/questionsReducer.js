@@ -4,6 +4,7 @@ import {
   LOADING_QUESTIONS,
   RESET_QUESTIONS,
   SET_QUESTIONS,
+  SET_QUESTIONS_ALL,
 } from "../actions/questionsActions";
 
 const initialState = {
@@ -16,6 +17,11 @@ export const selectQuestionsLoading = (state) => state.questions.loading;
 
 const questionsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_QUESTIONS_ALL:
+      return {
+        questions: [...action.payload],
+        loading: false,
+      };
     case SET_QUESTIONS:
       return {
         questions: [...state.questions, ...action.payload],

@@ -1,5 +1,8 @@
 const Reaction = require("../models/Reaction");
 const BaseRepository = require("./BaseRepository");
+const { db } = require("../db");
+const User = require("../models/User");
+const Question = require("../models/Question");
 
 class ReactionsRepository extends BaseRepository {
   constructor() {
@@ -41,6 +44,29 @@ class ReactionsRepository extends BaseRepository {
       });
 
       res.status(200).send("Reaction deleted");
+    };
+  }
+
+  getTopQuestions() {
+    return async (req, res) => {
+      try {
+        let response = await Reaction.findAll({
+          attributes: [
+            "reaction.questionid",
+            [db.fn("COUNT", db.col("reaction.questionid")), "likes"],
+          ],
+          include: [{ model: Question, as: "question" }],
+          where: {
+            islike: true,
+          },
+          group: ["reaction.questionid", "question.questionid"],
+          order: [[db.literal("likes"), "DESC"]],
+        });
+        response = response.slice(0, 3);
+        res.status(200).json(response);
+      } catch (err) {
+        res.status(500).send(err.toString());
+      }
     };
   }
 }

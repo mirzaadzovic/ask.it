@@ -1,23 +1,32 @@
 import React, { useState } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   addQuestion,
+  getQuestions,
   postQuestion,
+  setQuestions,
 } from "../../redux/actions/questionsActions";
 import { selectUser } from "../../redux/reducers/authReducer";
 import { selectQuestionsLoading } from "../../redux/reducers/questionsReducer";
 import UserAvatar from "../user_avatar/UserAvatar";
 import "./QuestionForm.css";
 
-const QuestionForm = ({ user, askQuestion, isLoading, setQuestions }) => {
+const QuestionForm = ({
+  user,
+  askQuestion,
+  isLoading,
+  setQuestions,
+  reload,
+}) => {
   const [text, setText] = useState("");
   const handleClick = async (e) => {
     e.preventDefault();
     const question = { questiontext: text, userid: user.userId };
-    const response = await askQuestion(question, user);
-    console.log(response);
-    setQuestions((prevState) => [response, ...prevState]);
+    await askQuestion(question, user);
     setText("");
+    const refresh = await reload();
+    setQuestions(refresh);
   };
   return (
     <form className="questionForm app__card">
@@ -52,6 +61,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     askQuestion: (question, user) => dispatch(postQuestion(question, user)),
+    reload: () => dispatch(getQuestions(0)),
   };
 };
 

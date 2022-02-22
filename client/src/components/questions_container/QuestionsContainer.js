@@ -24,15 +24,14 @@ const QuestionsContainer = ({
 }) => {
   const [pages, setPages] = useState(0);
   const [questions, setQuestions] = useState([]);
+  useEffect(() => {}, [questions]);
 
   useEffect(async () => {
+    console.log("LOAD", userId);
     const response = await fetchQuestions(pages, userId);
     setQuestions([...questions, ...response]);
+    return () => setQuestions(...questions);
   }, [userId, pages, fetchQuestions, setQuestions]);
-
-  useEffect(() => {
-    if (pages) setQuestions(questionsGlobal);
-  }, [questionsGlobal, questions]);
 
   return (
     <div className="questionsContainer app__questions">
@@ -40,7 +39,7 @@ const QuestionsContainer = ({
       <div className="questionsContainer__questions">
         {questions?.map((q, idx) => (
           <Question
-            key={idx}
+            key={q.questionId}
             question={q}
             setQuestions={setQuestions}
             questions={questions}

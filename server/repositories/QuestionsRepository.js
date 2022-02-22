@@ -17,7 +17,7 @@ class QuestionsRepository extends BaseRepository {
     return async (req, res) => {
       try {
         const count = 5;
-        const page = req.query.pages || 1;
+        const page = req.query.pages || 0;
         const response = await this.Model.findAll({
           include: [
             {
@@ -44,6 +44,7 @@ class QuestionsRepository extends BaseRepository {
           questions = questions.filter((q) => q.userId === parseInt(userId));
 
         questions = questions.slice(count * page, count * page + count);
+        console.log(questions);
 
         res.status(200).json(questions);
       } catch (err) {

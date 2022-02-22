@@ -6,6 +6,9 @@ const router = express.Router();
 // @GET ALL
 router.get("/", reactions.getAll());
 
+// @GET TOP QUESTIONS
+router.get("/top-questions", reactions.getTopQuestions());
+
 // @GET BY ID
 router.get("/:id", reactions.getById());
 

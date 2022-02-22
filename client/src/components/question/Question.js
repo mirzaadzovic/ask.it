@@ -19,10 +19,15 @@ const Question = ({ question, remove, setQuestions, questions }) => {
   const { questionId, questionDate, questionText, user, reactions } = question;
   const [edit, setEdit] = useState(false);
   const [text, setText] = useState(questionText);
+  const [tempText, setTempText] = useState(text);
 
   const handleEdit = () => setEdit(true);
-  const handleSave = () => {};
+  const handleSave = () => {
+    setText(tempText);
+    handleClose();
+  };
   const handleClose = () => setEdit(false);
+
   const handleDelete = () => {
     remove(questionId);
     setQuestions((prevstate) =>
@@ -31,7 +36,12 @@ const Question = ({ question, remove, setQuestions, questions }) => {
   };
 
   useEffect(() => {
-    return () => setEdit(false);
+    setText(questionText);
+    setTempText(text);
+    return () => {
+      setTempText(questionText);
+      setEdit(false);
+    };
   }, [loggedInUser, setEdit, questions]);
 
   return (
@@ -61,13 +71,13 @@ const Question = ({ question, remove, setQuestions, questions }) => {
         <textarea
           className="form-control"
           placeholder="Edit question..."
-          value={text}
+          value={tempText}
           onChange={(e) => {
-            setText(e.target.value);
+            setTempText(e.target.value);
           }}
         />
       ) : (
-        <p className="question__text">{questionText}</p>
+        <p className="question__text">{text}</p>
       )}
       {!edit && <Rating reactions={reactions} questionId={questionId} />}
       {loggedInUser && !edit && <AnswerForm />}
