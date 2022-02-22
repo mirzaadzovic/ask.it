@@ -12,6 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import { selectUser } from "../../redux/reducers/authReducer";
 import { connect, useSelector } from "react-redux";
 import { deleteQuestion } from "../../redux/actions/questionsActions";
+import APIService from "../../services/APIService";
 
 const Question = ({ question, remove, setQuestions, questions }) => {
   const loggedInUser = useSelector(selectUser);
@@ -22,8 +23,13 @@ const Question = ({ question, remove, setQuestions, questions }) => {
   const [tempText, setTempText] = useState(text);
 
   const handleEdit = () => setEdit(true);
-  const handleSave = () => {
+  const handleSave = async () => {
     setText(tempText);
+    await APIService.put("/questions/" + questionId, {
+      questionid: questionId,
+      questiontext: tempText,
+      userid: user.userId,
+    });
     handleClose();
   };
   const handleClose = () => setEdit(false);
