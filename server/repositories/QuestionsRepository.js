@@ -88,8 +88,9 @@ class QuestionsRepository extends BaseRepository {
         let question = new QuestionDto(response);
         question.reactions = new ReactionDto(response.get().reactions);
         res.status(201).json(question);
-      } catch {
-        res.status(500).send("Internal server error");
+      } catch (err) {
+        console.log(err.toString());
+        res.status(500).send(err.toString());
       }
     };
   }

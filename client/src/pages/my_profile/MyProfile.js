@@ -47,7 +47,7 @@ const MyProfile = ({ handleEdit, isError, message, user, reset }) => {
           handleEdit(user.userId, watch());
         })}
       >
-        <h2>MyProfile</h2>
+        <h2>Edit Profile</h2>
         {isError && (
           <p className="app__authForm--error app__error">{message}</p>
         )}
