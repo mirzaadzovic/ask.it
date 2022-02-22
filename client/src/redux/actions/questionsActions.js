@@ -82,7 +82,7 @@ export const postQuestion = (data, user) => {
     );
     question.user = { ...user };
     if (question) {
-      // dispatch(addQuestion(question));
+      dispatch(addQuestion(question));
       return question;
     }
   };

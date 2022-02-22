@@ -12,6 +12,7 @@ import Login from "./pages/login/Login";
 import Loading from "./pages/loading/Loading.js";
 import { selectIsLoading, selectUser } from "./redux/reducers/authReducer";
 import Register from "./pages/register/Register";
+import MyProfile from "./pages/my_profile/MyProfile";
 
 function App({ user, displayDropdown, close, isLoading }) {
   return (
@@ -35,6 +36,7 @@ function App({ user, displayDropdown, close, isLoading }) {
                 <Route path="/question/*" element={<Question />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/my-profile" element={<MyProfile />} />
               </Routes>
             </div>
           </>

@@ -1,5 +1,5 @@
 import { IconButton } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./RatingOption.css";
 import Tooltip from "@mui/material/Tooltip";
 import { selectUser } from "../../redux/reducers/authReducer";
@@ -68,7 +68,7 @@ const RatingOption = ({
     <div className="ratingOption">
       <Tooltip title={tooltip}>
         <IconButton onClick={handleClick}>
-          <Icon className="app__icon" style={clicked ? style : null} />
+          <Icon className="app__icon" style={clicked && user ? style : null} />
         </IconButton>
       </Tooltip>
       <p>{count + increment}</p>

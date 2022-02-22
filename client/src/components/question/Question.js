@@ -23,16 +23,21 @@ const Question = ({ question, remove, setQuestions, questions }) => {
   const [tempText, setTempText] = useState(text);
 
   const handleEdit = () => setEdit(true);
+
   const handleSave = async () => {
-    setText(tempText);
     await APIService.put("/questions/" + questionId, {
       questionid: questionId,
       questiontext: tempText,
       userid: user.userId,
     });
+
+    setText(tempText);
     handleClose();
   };
-  const handleClose = () => setEdit(false);
+  const handleClose = () => {
+    setTempText(text);
+    setEdit(false);
+  };
 
   const handleDelete = () => {
     remove(questionId);
@@ -45,7 +50,7 @@ const Question = ({ question, remove, setQuestions, questions }) => {
     return () => {
       setEdit(false);
     };
-  }, [loggedInUser, setEdit, questions, questionText]);
+  }, [loggedInUser, setEdit, questions, questionText, text]);
 
   return (
     <div className="question app__card">

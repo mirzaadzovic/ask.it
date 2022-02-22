@@ -1,5 +1,5 @@
 class ReactionDto {
-  constructor(reactions = []) {
+  constructor(reactions) {
     if (reactions.length > 0) {
       this.likedByUsers = reactions.map((r) => ({
         userId: r.userid,

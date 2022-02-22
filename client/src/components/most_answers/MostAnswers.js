@@ -9,7 +9,6 @@ const MostAnswers = () => {
 
   useState(async () => {
     const response = await APIService.getAll("/users/top-responders");
-    console.log(response);
     setUsers(response);
   }, []);
   const Component = topHOC(UserAvatar, "Top 3 responders", users);

@@ -7,12 +7,12 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { closeDropdown } from "../../redux/actions/dropdownActions";
 import { logout } from "../../redux/actions/authActions";
+import { resetQuestions } from "../../redux/actions/questionsActions";
 
-const Dropdown = ({ close, logoutUser }) => {
+const Dropdown = ({ close, logoutUser, resetQuestions }) => {
   const onLogout = () => {
     close();
     logoutUser();
-    window.location.reload();
   };
   return (
     <div className="dropdown card">

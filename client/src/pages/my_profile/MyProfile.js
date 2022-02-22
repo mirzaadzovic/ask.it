@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../components/logo/Logo";
-import "./Register.css";
+import "./MyProfile.css";
 import { useForm } from "react-hook-form";
 import {
   login,
@@ -15,10 +15,9 @@ import {
 } from "../../redux/reducers/authReducer";
 import { connect } from "react-redux";
 import { resetQuestions } from "../../redux/actions/questionsActions";
+import { Avatar } from "@mui/material";
 
-const Register = ({ handleRegister, isError, message, user, reset }) => {
-  const navigate = useNavigate();
-
+const MyProfile = ({ handleRegister, isError, message, user, reset }) => {
   const {
     register,
     handleSubmit,
@@ -26,26 +25,23 @@ const Register = ({ handleRegister, isError, message, user, reset }) => {
     formState: { errors },
   } = useForm();
 
-  useEffect(() => {
-    if (user) navigate("/");
-    return () => reset();
-  }, [user, navigate]);
-
-  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
   const password = useRef({});
   password.current = watch("password", "");
 
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
   return (
-    <div className="register app__card">
-      <Logo />
+    <div className="myProfile app__card">
+      <center>
+        <Avatar src={user.avatarUrl} />
+      </center>
       <form
         className="app__authForm"
         onSubmit={handleSubmit(() => {
           handleRegister(watch());
         })}
       >
-        <h2>Register</h2>
+        <h2>MyProfile</h2>
         {isError && (
           <p className="app__authForm--error app__error">{message}</p>
         )}
@@ -54,6 +50,7 @@ const Register = ({ handleRegister, isError, message, user, reset }) => {
           type="text"
           placeholder="First name"
           {...register("firstname", {
+            value: user.firstName,
             required: "Required!",
             minLength: { value: 2, message: "Too short" },
           })}
@@ -67,6 +64,7 @@ const Register = ({ handleRegister, isError, message, user, reset }) => {
           placeholder="Last name"
           {...register("lastname", {
             required: "Required!",
+            value: user.lastName,
             minLength: { value: 2, message: "Too short" },
           })}
         />
@@ -78,7 +76,9 @@ const Register = ({ handleRegister, isError, message, user, reset }) => {
           className="form-control"
           type="email"
           placeholder="Email"
+          readOnly={true}
           {...register("email", {
+            value: user.email,
             required: "Required!",
             pattern: { value: emailRegex, message: "Wrong email format" },
           })}
@@ -89,7 +89,7 @@ const Register = ({ handleRegister, isError, message, user, reset }) => {
           className="form-control"
           type="text"
           placeholder="Avatar URL"
-          {...register("avatarurl")}
+          {...register("avatarurl", { value: user.avatarUrl })}
         />
 
         <input
@@ -124,10 +124,14 @@ const Register = ({ handleRegister, isError, message, user, reset }) => {
           <p className="app__error">{errors.passwordConfirm.message}</p>
         )}
 
-        <button className="btn btn-primary" type="submit">
-          Register
+        <button
+          onClick={() => console.log(password.current)}
+          className="btn btn-primary"
+          type="submit"
+        >
+          Save Changes
         </button>
-        <Link to="/login"> Already have an account? Login now</Link>
+        <Link to="/"> Back to feed</Link>
       </form>
     </div>
   );
@@ -145,4 +149,4 @@ const mapDispatchToProps = (dispatch) => {
     reset: () => dispatch(resetQuestions()),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);
