@@ -12,6 +12,7 @@ const Dropdown = ({ close, logoutUser }) => {
   const onLogout = () => {
     close();
     logoutUser();
+    window.location.reload();
   };
   return (
     <div className="dropdown card">

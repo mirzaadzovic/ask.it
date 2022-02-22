@@ -16,14 +16,11 @@ const QuestionsContainer = ({
   user,
   fetchQuestions,
   isLoading,
-  reset,
 }) => {
   const [pages, setPages] = useState(0);
   const [questions, setQuestions] = useState([]);
-  useEffect(() => {}, [questions]);
 
   useEffect(async () => {
-    console.log("LOAD", userId);
     const response = await fetchQuestions(pages, userId);
     setQuestions([...questions, ...response]);
   }, [userId, pages, fetchQuestions, setQuestions]);

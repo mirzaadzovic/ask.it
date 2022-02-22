@@ -4,6 +4,8 @@ const router = express.Router();
 
 // @GET ALL
 router.get("/", users.getAll());
+// @GET TOP RESPONDERS
+router.get("/top-responders", users.getTopResponders());
 
 // @GET BY ID
 router.get("/:id", users.getById());
