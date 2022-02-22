@@ -74,3 +74,14 @@ export const logout = () => {
     dispatch(resetUser());
   };
 };
+
+export const updateUser = (id, data) => {
+  return async (dispatch) => {
+    dispatch(setLoading());
+    const response = await APIService.put("/auth/" + id, data).catch(
+      (err) => null
+    );
+    if (response) dispatch(setUser(response));
+    else dispatch(setLoginError());
+  };
+};

@@ -67,7 +67,7 @@ const RatingOption = ({
   return (
     <div className="ratingOption">
       <Tooltip title={tooltip}>
-        <IconButton onClick={handleClick}>
+        <IconButton onClick={handleClick} disabled={!user}>
           <Icon className="app__icon" style={clicked && user ? style : null} />
         </IconButton>
       </Tooltip>

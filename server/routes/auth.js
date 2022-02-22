@@ -32,6 +32,28 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// @UPDATE
+router.put("/:id", async (req, res) => {
+  try {
+    if (!req.body) return res.status(400).send("400 BAD REQUEST");
+    const { email, password } = req.body;
+
+    const response = await User.findOne({ where: { email } });
+    const user = response?.get();
+
+    if (!user) return res.status(401).send("401 UNAUTHORIZED");
+    const correctPassword = await bcrypt.compare(password, user.passwordhash);
+
+    if (!correctPassword) return res.status(401).send("401 UNAUTHORIZED");
+
+    response.set(req.body);
+    response.save();
+    return res.status(200).json(new UserProfileDto(response.get()));
+  } catch (err) {
+    res.status(500).send(err.toString());
+  }
+});
+
 // @REGISTER
 router.post("/register", async (req, res) => {
   try {

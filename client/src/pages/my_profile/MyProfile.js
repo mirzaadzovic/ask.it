@@ -7,6 +7,7 @@ import {
   login,
   registerUser,
   resetUser,
+  updateUser,
 } from "../../redux/actions/authActions";
 import {
   selectAuthMessage,
@@ -17,13 +18,18 @@ import { connect } from "react-redux";
 import { resetQuestions } from "../../redux/actions/questionsActions";
 import { Avatar } from "@mui/material";
 
-const MyProfile = ({ handleRegister, isError, message, user, reset }) => {
+const MyProfile = ({ handleEdit, isError, message, user, reset }) => {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm();
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) navigate("/login");
+  }, [user]);
 
   const password = useRef({});
   password.current = watch("password", "");
@@ -33,12 +39,12 @@ const MyProfile = ({ handleRegister, isError, message, user, reset }) => {
   return (
     <div className="myProfile app__card">
       <center>
-        <Avatar src={user.avatarUrl} />
+        <Avatar src={user?.avatarUrl} />
       </center>
       <form
         className="app__authForm"
         onSubmit={handleSubmit(() => {
-          handleRegister(watch());
+          handleEdit(user.userId, watch());
         })}
       >
         <h2>MyProfile</h2>
@@ -50,7 +56,7 @@ const MyProfile = ({ handleRegister, isError, message, user, reset }) => {
           type="text"
           placeholder="First name"
           {...register("firstname", {
-            value: user.firstName,
+            value: user?.firstName,
             required: "Required!",
             minLength: { value: 2, message: "Too short" },
           })}
@@ -64,7 +70,7 @@ const MyProfile = ({ handleRegister, isError, message, user, reset }) => {
           placeholder="Last name"
           {...register("lastname", {
             required: "Required!",
-            value: user.lastName,
+            value: user?.lastName,
             minLength: { value: 2, message: "Too short" },
           })}
         />
@@ -78,7 +84,7 @@ const MyProfile = ({ handleRegister, isError, message, user, reset }) => {
           placeholder="Email"
           readOnly={true}
           {...register("email", {
-            value: user.email,
+            value: user?.email,
             required: "Required!",
             pattern: { value: emailRegex, message: "Wrong email format" },
           })}
@@ -89,7 +95,7 @@ const MyProfile = ({ handleRegister, isError, message, user, reset }) => {
           className="form-control"
           type="text"
           placeholder="Avatar URL"
-          {...register("avatarurl", { value: user.avatarUrl })}
+          {...register("avatarurl", { value: user?.avatarUrl })}
         />
 
         <input
@@ -145,7 +151,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleRegister: (data) => dispatch(registerUser(data)),
+    handleEdit: (id, data) => dispatch(updateUser(id, data)),
     reset: () => dispatch(resetQuestions()),
   };
 };
