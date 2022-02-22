@@ -32,14 +32,19 @@ const QuestionsContainer = ({
 
   useEffect(() => {
     if (pages) setQuestions(questionsGlobal);
-  }, [questionsGlobal]);
+  }, [questionsGlobal, questions]);
 
   return (
     <div className="questionsContainer app__questions">
       {!userId && user && <QuestionForm setQuestions={setQuestions} />}
       <div className="questionsContainer__questions">
         {questions?.map((q, idx) => (
-          <Question key={idx} question={q} setQuestions={setQuestions} />
+          <Question
+            key={idx}
+            question={q}
+            setQuestions={setQuestions}
+            questions={questions}
+          />
         ))}
       </div>
       {isLoading ? (

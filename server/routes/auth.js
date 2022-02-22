@@ -50,7 +50,12 @@ router.post("/register", async (req, res) => {
       const response = await User.create(body).catch((err) => err);
       if (!response) return res.status(400).send("Bad request");
 
-      res.status(201).json(new UserProfileDto(response.get()));
+      const token = JwtHelpers.GenerateToken(response.get());
+
+      return res
+        .status(201)
+        .cookie("ask_it", token, { httpOnly: true, maxAge: 3600000 })
+        .json(new UserProfileDto(response.get()));
     });
   } catch (error) {
     res.status(500).send(error.toString());

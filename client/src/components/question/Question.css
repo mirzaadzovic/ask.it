@@ -29,3 +29,10 @@
   color: rgb(97, 97, 97);
   transition: 0.2s;
 }
+
+.question > textarea {
+  resize: none;
+  height: 80px !important;
+  margin: 10px 0;
+  background-color: var(--light-gray);
+}

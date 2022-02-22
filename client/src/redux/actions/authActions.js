@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import APIService from "../../services/APIService";
 import AuthService from "../../services/AuthService";
 
 export const SET_LOADING = "SET_LOADING";
@@ -36,6 +37,19 @@ export const login = (data) => {
     dispatch(setLoading());
 
     const user = await AuthService.logIn(email, password).catch((err) => null);
+
+    if (user) dispatch(setUser(user));
+    else dispatch(setLoginError());
+  };
+};
+
+export const registerUser = (data) => {
+  return async (dispatch) => {
+    dispatch(setLoading());
+
+    const user = await APIService.post("/auth/register", data).catch(
+      (err) => null
+    );
 
     if (user) dispatch(setUser(user));
     else dispatch(setLoginError());

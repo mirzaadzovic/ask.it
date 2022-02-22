@@ -1,0 +1,15 @@
+.register {
+  margin: auto;
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 300px;
+  padding: 50px 20px !important;
+}
+
+@media (max-width: 400px) {
+  .register {
+    width: 100%;
+  }
+}
