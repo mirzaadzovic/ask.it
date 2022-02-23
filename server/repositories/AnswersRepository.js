@@ -17,7 +17,10 @@ class AnswersRepository extends BaseRepository {
       try {
         const count = 2;
         const page = req.query.page || 0;
+        const skip = req.query.skip || 0;
         const { questionId } = req.query;
+
+        console.log("skip", skip, typeof skip);
 
         const response = await Answer.findAll({
           attributes: [
@@ -42,8 +45,6 @@ class AnswersRepository extends BaseRepository {
           order: [["answerdate", "DESC"]],
         }).catch((err) => console.log(err.toString()));
 
-        console.log(response);
-
         if (!response) return res.status(200).json([]);
 
         let questions = response.map((v) => v.toJSON());
@@ -53,7 +54,10 @@ class AnswersRepository extends BaseRepository {
           reactions: new ReactionDto(q.reactions),
         }));
 
-        questions = questions.slice(count * page, count * page + count);
+        questions = questions.slice(
+          count * page + Number(skip),
+          count * page + Number(count) + Number(skip)
+        );
         console.log(questions);
 
         res.status(200).json(questions.reverse());

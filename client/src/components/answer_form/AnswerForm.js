@@ -5,7 +5,7 @@ import { selectUser } from "../../redux/reducers/authReducer";
 import APIService from "../../services/APIService";
 import "./AnswerForm.css";
 
-const AnswerForm = ({ user, questionId, setAnswers }) => {
+const AnswerForm = ({ user, questionId, setAnswers, setSkip }) => {
   const [text, setText] = useState("");
 
   const handleSubmit = async (e) => {
@@ -19,6 +19,7 @@ const AnswerForm = ({ user, questionId, setAnswers }) => {
     response.user = { ...user };
     if (response) setAnswers((prevState) => [...prevState, response]);
     setText("");
+    setSkip((prevState) => ++prevState);
   };
 
   return (

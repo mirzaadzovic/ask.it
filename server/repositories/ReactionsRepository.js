@@ -36,12 +36,14 @@ class ReactionsRepository extends BaseRepository {
       if (!req.params) res.status(400).send("Bad request");
       const { id } = req.params;
 
-      await Reaction.destroy({
+      const response = await Reaction.destroy({
         where: {
           userid: req.user.id,
           questionid: id,
         },
-      });
+      }).catch((err) => null);
+
+      if (!response) return res.status(404).send("No item to delete");
 
       res.status(200).send("Reaction deleted");
     };

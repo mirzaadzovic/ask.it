@@ -38,3 +38,21 @@
 .answer__body .app__icon {
   font-size: medium;
 }
+
+.answer__body .ratingOption:nth-child(1) {
+  margin-right: 15px;
+}
+
+.answer__bodyHeader {
+  position: relative;
+}
+
+.answer__delete {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+}
+
+.answer__delete > * {
+  font-size: medium !important;
+}

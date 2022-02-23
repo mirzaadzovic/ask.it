@@ -7,8 +7,10 @@ import "./AnswersContainer.css";
 
 const AnswersContainer = ({ questionId }) => {
   const [answers, setAnswers] = useState([]);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(0); // answers pagination
   const [loading, setLoading] = useState(false);
+  const [skip, setSkip] = useState(0); /*if new answer is added in a meantime, 
+                                        we want to skip it when loading more answers*/
   const [loadingText, setLoadingText] = useState("Load more comments...");
 
   const fetchData = async () => {
@@ -17,6 +19,7 @@ const AnswersContainer = ({ questionId }) => {
     const response = await APIService.getAll("/answers", {
       page,
       questionId,
+      skip,
     }).catch((err) => null);
 
     if (!response.length) setLoadingText("");
@@ -30,7 +33,11 @@ const AnswersContainer = ({ questionId }) => {
 
   return (
     <div className="answersContainer">
-      <AnswerForm questionId={questionId} setAnswers={setAnswers} />
+      <AnswerForm
+        questionId={questionId}
+        setAnswers={setAnswers}
+        setSkip={setSkip}
+      />
       {loading ? (
         <center style={{ padding: "20px" }}>
           <LoadingSpinner />
@@ -40,7 +47,7 @@ const AnswersContainer = ({ questionId }) => {
       )}
 
       {answers.map((a) => (
-        <Answer key={a?.answerId} answer={a} />
+        <Answer key={a?.answerId} answer={a} setAnswers={setAnswers} />
       ))}
     </div>
   );
