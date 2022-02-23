@@ -56,3 +56,15 @@
 .answer__delete > * {
   font-size: medium !important;
 }
+
+.answer__bodyHeader > a {
+  color: var(--black);
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.answer__bodyHeader > a:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}

@@ -17,7 +17,9 @@ const Question = () => {
       {question ? (
         <QuestionComponent question={question} />
       ) : (
-        <LoadingSpinner />
+        <center style={{ padding: "20px" }}>
+          <LoadingSpinner />
+        </center>
       )}
     </div>
   );

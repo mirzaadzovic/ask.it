@@ -1,5 +1,6 @@
 import { Avatar } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 import "./UserTop3.css";
 
 const UserTop3 = ({ rating, count, Component, question, user }) => {
@@ -12,7 +13,9 @@ const UserTop3 = ({ rating, count, Component, question, user }) => {
         ) : (
           <div className="userAvatar">
             <Avatar src={user?.avatarUrl} />
-            <h5>{`${user?.firstName} ${user?.lastName}`}</h5>
+            <Link
+              to={`/user/${user.userId}`}
+            >{`${user?.firstName} ${user?.lastName}`}</Link>
           </div>
         )}
       </div>

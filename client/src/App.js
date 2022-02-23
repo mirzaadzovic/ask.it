@@ -30,7 +30,7 @@ function App({ user, displayDropdown, close, isLoading }) {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route
-                  path="my-questions"
+                  path="/user/*"
                   element={<MyQuestions userId={user?.userId} />}
                 />
                 <Route path="/question/*" element={<Question />} />

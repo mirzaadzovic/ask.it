@@ -7,9 +7,9 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { closeDropdown } from "../../redux/actions/dropdownActions";
 import { logout } from "../../redux/actions/authActions";
-import { resetQuestions } from "../../redux/actions/questionsActions";
+import { selectUser } from "../../redux/reducers/authReducer";
 
-const Dropdown = ({ close, logoutUser, resetQuestions }) => {
+const Dropdown = ({ close, logoutUser, user }) => {
   const onLogout = () => {
     close();
     logoutUser();
@@ -24,7 +24,7 @@ const Dropdown = ({ close, logoutUser, resetQuestions }) => {
           </Link>
         </li>
         <li onClick={close} className="list-group-item">
-          <Link className="dropdown__item" to="my-questions">
+          <Link className="dropdown__item" to={`/user/${user.userId}`}>
             <QuizIcon className="dropdown__icon" />
             <p>My questions</p>
           </Link>
@@ -40,6 +40,11 @@ const Dropdown = ({ close, logoutUser, resetQuestions }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    user: selectUser(state),
+  };
+};
 const mapDispatchToProps = (dispatch) => {
   return {
     close: () => {
@@ -50,4 +55,4 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-export default connect(null, mapDispatchToProps)(Dropdown);
+export default connect(mapStateToProps, mapDispatchToProps)(Dropdown);

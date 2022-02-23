@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/reducers/authReducer";
 import { Tooltip } from "@mui/material";
 import APIService from "../../services/APIService";
+import { Link } from "react-router-dom";
 
 const Answer = ({ answer, setAnswers }) => {
   const user = useSelector(selectUser);
@@ -24,7 +25,7 @@ const Answer = ({ answer, setAnswers }) => {
       <Avatar src={avatarUrl} style={{ height: "2rem", width: "2rem" }} />
       <div className="answer__body">
         <div className="answer__bodyHeader">
-          <strong>{`${firstName} ${lastName}`}</strong>
+          <Link to={`/user/${userId}`}>{`${firstName} ${lastName}`}</Link>
           {user.userId === userId && (
             <Tooltip title="Delete">
               <IconButton className="answer__delete" onClick={handleDelete}>
