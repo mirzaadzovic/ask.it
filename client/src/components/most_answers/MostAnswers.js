@@ -7,9 +7,8 @@ import "./MostAnswers.css";
 const MostAnswers = () => {
   const [users, setUsers] = useState(null);
 
-  useState(async () => {
+  const fetchData = async () => {
     const response = await APIService.getAll("/users/top-responders");
-    console.log(response);
     setUsers(
       response.map((r) => ({
         userId: r.userid,
@@ -19,9 +18,12 @@ const MostAnswers = () => {
         avatarUrl: r.avatarurl,
       }))
     );
+  };
+
+  useState(() => {
+    fetchData();
   }, []);
   const Component = topHOC(UserAvatar, "Top 3 responders", users);
   return <Component />;
 };
-
 export default MostAnswers;
