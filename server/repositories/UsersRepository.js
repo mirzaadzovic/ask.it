@@ -18,10 +18,17 @@ class UsersRepository extends BaseRepository {
             ["firstname", "firstName"],
             ["lastname", "lastName"],
             ["avatarurl", "avatarUrl"],
-            [db.fn("COUNT", db.col("answers.userid")), "total"],
+            [db.fn("COUNT", db.col("answers.answerid")), "total"],
           ],
           include: [{ model: Answer, as: "answers" }],
-          group: ["answers.userid", "user.userid", "answers.answerid"],
+          group: [
+            "answers.userid",
+            "user.userid",
+            "firstname",
+            "lastname",
+            "avatarurl",
+            "answers.answerid",
+          ],
           order: [[db.literal("total"), "DESC"]],
         });
         response = response.slice(0, 3);

@@ -13,6 +13,7 @@ import { selectUser } from "../../redux/reducers/authReducer";
 import { connect, useSelector } from "react-redux";
 import { deleteQuestion } from "../../redux/actions/questionsActions";
 import APIService from "../../services/APIService";
+import AnswersContainer from "../answers_container/AnswersContainer";
 
 const Question = ({ question, remove, setQuestions, questions }) => {
   const loggedInUser = useSelector(selectUser);
@@ -88,7 +89,7 @@ const Question = ({ question, remove, setQuestions, questions }) => {
         <p className="question__text">{text}</p>
       )}
       {!edit && <Rating reactions={reactions} questionId={questionId} />}
-      {loggedInUser && !edit && <AnswerForm />}
+      {loggedInUser && !edit && <AnswersContainer questionId={questionId} />}
     </div>
   );
 };

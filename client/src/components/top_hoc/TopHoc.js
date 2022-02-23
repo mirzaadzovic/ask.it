@@ -1,7 +1,7 @@
 import LoadingSpinner from "../loading/Loading";
 import UserTop3 from "../user_top3/UserTop3";
 
-const topHOC = (Component, title, data = null) => {
+const topHOC = (Component, title, data = []) => {
   return () => {
     const users = [1, 2, 3];
     return (
@@ -15,7 +15,7 @@ const topHOC = (Component, title, data = null) => {
                 <UserTop3
                   key={idx}
                   rating={idx + 1}
-                  count={data[idx].total}
+                  count={data[idx]?.total}
                   Component={Component}
                   question={data ? data[idx] : null}
                   user={data[idx]}

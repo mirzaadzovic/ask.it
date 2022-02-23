@@ -2,10 +2,25 @@ import { Avatar } from "@mui/material";
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { selectUser } from "../../redux/reducers/authReducer";
+import APIService from "../../services/APIService";
 import "./AnswerForm.css";
 
-const AnswerForm = ({ user }) => {
+const AnswerForm = ({ user, questionId, setAnswers }) => {
   const [text, setText] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await APIService.post("/answers", {
+      userid: user.userId,
+      questionid: questionId,
+      answertext: text,
+    }).catch((err) => null);
+
+    response.user = { ...user };
+    if (response) setAnswers((prevState) => [...prevState, response]);
+    setText("");
+  };
+
   return (
     <form className="answerForm">
       <div className="answerForm__input">
@@ -22,7 +37,7 @@ const AnswerForm = ({ user }) => {
         />
       </div>
       {text && (
-        <button className="btn btn-primary" onClick={(e) => e.preventDefault()}>
+        <button className="btn btn-primary" onClick={handleSubmit}>
           Send Answer
         </button>
       )}
