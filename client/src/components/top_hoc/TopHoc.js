@@ -3,7 +3,7 @@ import UserTop3 from "../user_top3/UserTop3";
 
 const topHOC = (Component, title, data = []) => {
   return () => {
-    const users = [1, 2, 3];
+    const users = data.length;
     return (
       <div className="mostAnswers app__card">
         <p className="app__title">{title}</p>

@@ -17,7 +17,10 @@ require("dotenv").config();
 app.use(cors(config.get("cors_settings")));
 app.use(cookieParser());
 app.use(express.json());
-if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
+if (process.env.NODE_ENV !== "production") app.use(morgan("dev"));
+
+if (process.env.NODE_ENV === "production")
+  app.use(express.static("../client/build"));
 
 // MIDDLEWARE -- ROUTES
 const { API_ROUTE } = process.env;

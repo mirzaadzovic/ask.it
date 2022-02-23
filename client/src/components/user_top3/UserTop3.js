@@ -12,7 +12,7 @@ const UserTop3 = ({ rating, count, Component, question, user }) => {
           <Component question={question} />
         ) : (
           <div className="userAvatar">
-            <Avatar src={user?.avatarUrl} />
+            <Avatar src={user?.firstName} />
             <Link
               to={`/user/${user.userId}`}
             >{`${user?.firstName} ${user?.lastName}`}</Link>
