@@ -28,11 +28,7 @@ const QuestionsContainer = ({
   if (questions.length === 0)
     return (
       <center style={{ padding: "40px" }}>
-        {userId ? (
-          <p>No questions asked {user?.firstName} my bro</p>
-        ) : (
-          <LoadingSpinner />
-        )}
+        {userId ? <p>No questions asked</p> : <LoadingSpinner />}
       </center>
     );
 
