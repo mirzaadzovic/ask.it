@@ -29,6 +29,9 @@ const Answer = db.define(
 Answer.hasMany(AnswerReaction, {
   as: "reactions",
   foreignKey: "answerid",
+  onDelete: "cascade",
+  hooks: true,
 });
 AnswerReaction.hasOne(Answer, { foreignKey: "answerid" });
+
 module.exports = Answer;

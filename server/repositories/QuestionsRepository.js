@@ -1,9 +1,10 @@
-const db = require("../db");
+const { db } = require("../db");
 const QuestionDto = require("../dtos/QuestionDto");
 const ReactionDto = require("../dtos/ReactionDto");
 const UserDto = require("../dtos/UserDto");
 const QueryHelper = require("../helpers/QueryHelper");
 const Answer = require("../models/Answer");
+const AnswerReaction = require("../models/AnswerReaction");
 const Question = require("../models/Question");
 const Reaction = require("../models/Reaction");
 const User = require("../models/User");
@@ -98,7 +99,16 @@ class QuestionsRepository extends BaseRepository {
     return async (req, res) => {
       try {
         const { id } = req.params;
+        const query = `
+        delete from answerreactions as ar
+        using answers as a 
+        where a.questionid = ?`;
 
+        await db
+          .query(query, { replacements: [id] })
+          .catch((err) => console.log(err.toString()));
+
+        await Answer.destroy({ where: { questionid: id } });
         await Reaction.destroy({ where: { questionid: id } });
         const entity = await Question.findByPk(id);
         if (!entity) return res.status(404).send("Not found");
