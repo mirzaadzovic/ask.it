@@ -88,20 +88,12 @@ class AnswersRepository extends BaseRepository {
     return async (req, res) => {
       try {
         const { id } = req.params;
-        const query = `
-        delete from answerreactions as ar 
-        join answers as a on a.answerid=ar.answerid
-        where a.questionid = ?`;
-
-        await db
-          .query(query, { replacements: [id] })
-          .catch((err) => console.log(err.toString()));
-        await AnswerReaction.destroy({ where: { answerid: id } });
-
         const entity = await Answer.findByPk(id);
         if (!entity) return res.status(404).send("Not found");
 
+        await AnswerReaction.destroy({ where: { answerid: id } });
         await entity.destroy();
+
         res.status(204).send("Deleted");
       } catch (err) {
         console.log(err.toString());

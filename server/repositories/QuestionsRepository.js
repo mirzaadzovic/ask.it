@@ -99,6 +99,10 @@ class QuestionsRepository extends BaseRepository {
     return async (req, res) => {
       try {
         const { id } = req.params;
+
+        const entity = await Question.findByPk(id);
+        if (!entity) return res.status(404).send("Not found");
+
         const query = `
         delete from answerreactions as ar
         using answers as a 
@@ -110,8 +114,6 @@ class QuestionsRepository extends BaseRepository {
 
         await Answer.destroy({ where: { questionid: id } });
         await Reaction.destroy({ where: { questionid: id } });
-        const entity = await Question.findByPk(id);
-        if (!entity) return res.status(404).send("Not found");
 
         await entity.destroy();
         res.status(204).send("Deleted");
