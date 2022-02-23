@@ -1,6 +1,7 @@
 const express = require("express");
 const { answerReactions } = require("../repositories/UnitOfWork.js");
 const router = express.Router();
+const authMiddleware = require("../middlewares/auth.js");
 
 // @GET ALL
 router.get("/", answerReactions.getAll());
@@ -9,12 +10,12 @@ router.get("/", answerReactions.getAll());
 router.get("/:id", answerReactions.getById());
 
 // @POST
-router.post("/", answerReactions.post());
+router.post("/", authMiddleware, answerReactions.post());
 
 // @UPDATE
-router.put("/:id", answerReactions.update());
+router.put("/:id", authMiddleware, answerReactions.update());
 
 // @DELETE
-router.delete("/:id", answerReactions.delete());
+router.delete("/:id", authMiddleware, answerReactions.delete());
 
 module.exports = router;

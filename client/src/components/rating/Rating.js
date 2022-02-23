@@ -11,6 +11,8 @@ const Rating = ({
   reactions = { likedByUsers: [], likes: 0, dislikes: 0 },
   user,
   questionId,
+  Model,
+  route,
 }) => {
   const { likedByUsers, likes, dislikes } = reactions;
   const isLiked = likedByUsers.filter((r) => r?.userId === user?.userId)[0]
@@ -40,6 +42,8 @@ const Rating = ({
         questionId={questionId}
         isLike={true}
         setOtherCount={setDislikeCount}
+        Model={Model}
+        route={route}
       />
       <RatingOption
         Icon={ThumbDownIcon}
@@ -52,6 +56,8 @@ const Rating = ({
         questionId={questionId}
         isLike={false}
         setOtherCount={setLikeCount}
+        Model={Model}
+        route={route}
       />
     </div>
   );

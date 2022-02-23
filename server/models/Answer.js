@@ -27,7 +27,7 @@ const Answer = db.define(
 );
 
 Answer.hasMany(AnswerReaction, {
-  as: "answerreactions",
+  as: "reactions",
   foreignKey: "answerid",
 });
 AnswerReaction.hasOne(Answer, { foreignKey: "answerid" });

@@ -18,6 +18,8 @@ const RatingOption = ({
   questionId,
   isLike,
   setOtherCount,
+  route,
+  Model,
 }) => {
   const style = { color: "var(--black)" };
   const [increment, setIncrement] = useState(0);
@@ -25,16 +27,16 @@ const RatingOption = ({
   const submit = async (data) => {
     // Check which method will be executed
     if (!clicked && !otherClicked) {
-      const reaction = await APIService.post("/reactions", data);
+      const reaction = await APIService.post(route, data);
       setIncrement(increment + 1);
     } else if (clicked && !otherClicked) {
       const reaction = await APIService.delete(
-        "/reactions/" + questionId,
+        route + "/" + questionId,
         questionId
       );
       setIncrement(increment - 1);
     } else if (!clicked && otherClicked) {
-      const reaction = await APIService.put("/reactions/" + questionId, {
+      const reaction = await APIService.put(route + "/" + questionId, {
         question: questionId,
         userid: user.userId,
       });
@@ -50,11 +52,11 @@ const RatingOption = ({
     }
   };
   const handleClick = async () => {
-    const data = {
+    const data = new Model({
       islike: isLike,
       userid: user.userId,
       questionid: questionId,
-    };
+    });
 
     await submit(data);
 

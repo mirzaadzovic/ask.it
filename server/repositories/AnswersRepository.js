@@ -4,6 +4,8 @@ const BaseRepository = require("./BaseRepository");
 const UserDto = require("../dtos/UserDto");
 const { db } = require("../db");
 const AnswerDto = require("../dtos/AnswerDto");
+const AnswerReaction = require("../models/AnswerReaction");
+const ReactionDto = require("../dtos/ReactionDto");
 
 class AnswersRepository extends BaseRepository {
   constructor() {
@@ -29,6 +31,10 @@ class AnswersRepository extends BaseRepository {
               model: User,
               as: "user",
             },
+            {
+              model: AnswerReaction,
+              as: "reactions",
+            },
           ],
           where: {
             questionid: questionId,
@@ -44,6 +50,7 @@ class AnswersRepository extends BaseRepository {
         questions = questions.map((q) => ({
           ...q,
           user: new UserDto(q.user),
+          reactions: new ReactionDto(q.reactions),
         }));
 
         questions = questions.slice(count * page, count * page + count);

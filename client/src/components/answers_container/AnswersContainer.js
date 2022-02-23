@@ -1,7 +1,6 @@
-import { Avatar } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import ReactTimeAgo from "react-time-ago";
 import APIService from "../../services/APIService";
+import Answer from "../answer/Answer";
 import AnswerForm from "../answer_form/AnswerForm";
 import LoadingSpinner from "../loading/Loading";
 import "./AnswersContainer.css";
@@ -41,20 +40,7 @@ const AnswersContainer = ({ questionId }) => {
       )}
 
       {answers.map((a) => (
-        <div key={a?.answerId} className="answersContainer__answer">
-          <Avatar
-            src={a?.user.avatarUrl}
-            style={{ height: "2rem", width: "2rem" }}
-          />
-          <div className="answersContainer__answerBody">
-            <strong>{`${a?.user?.firstName} ${a?.user?.lastName}`}</strong>
-            <p>{a?.answerText}</p>
-            <ReactTimeAgo
-              date={new Date(a?.answerDate)}
-              className="answersContainer__time"
-            />
-          </div>
-        </div>
+        <Answer key={a?.answerId} answer={a} />
       ))}
     </div>
   );

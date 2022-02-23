@@ -14,6 +14,7 @@ import { connect, useSelector } from "react-redux";
 import { deleteQuestion } from "../../redux/actions/questionsActions";
 import APIService from "../../services/APIService";
 import AnswersContainer from "../answers_container/AnswersContainer";
+import ReactionInsertDto from "../../models/ReactionInsertDto";
 
 const Question = ({ question, remove, setQuestions, questions }) => {
   const loggedInUser = useSelector(selectUser);
@@ -88,7 +89,14 @@ const Question = ({ question, remove, setQuestions, questions }) => {
       ) : (
         <p className="question__text">{text}</p>
       )}
-      {!edit && <Rating reactions={reactions} questionId={questionId} />}
+      {!edit && (
+        <Rating
+          reactions={reactions}
+          questionId={questionId}
+          Model={ReactionInsertDto}
+          route={"/reactions"}
+        />
+      )}
       {loggedInUser && !edit && <AnswersContainer questionId={questionId} />}
     </div>
   );
