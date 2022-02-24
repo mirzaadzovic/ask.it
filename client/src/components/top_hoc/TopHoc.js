@@ -3,14 +3,14 @@ import UserTop3 from "../user_top3/UserTop3";
 
 const topHOC = (Component, title, data = []) => {
   return () => {
-    const users = data.length;
+    const users = data?.map((d, idx) => idx);
     return (
       <div className="mostAnswers app__card">
         <p className="app__title">{title}</p>
 
         {data ? (
           <>
-            {users.map((u, idx) => {
+            {users?.map((u, idx) => {
               return (
                 <UserTop3
                   key={idx}

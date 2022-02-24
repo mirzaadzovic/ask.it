@@ -25,12 +25,12 @@ const QuestionsContainer = ({
     setQuestions([...questions, ...response]);
   }, [userId, pages, fetchQuestions, setQuestions]);
 
-  if (questions.length === 0)
-    return (
-      <center style={{ padding: "40px" }}>
-        {userId ? <p>No questions asked</p> : <LoadingSpinner />}
-      </center>
-    );
+  // if (questions.length === 0)
+  //   return (
+  //     <center style={{ padding: "40px" }}>
+  //       {userId ? <p>No questions asked</p> : <LoadingSpinner />}
+  //     </center>
+  //   );
 
   return (
     <div className="questionsContainer app__questions">
@@ -48,7 +48,11 @@ const QuestionsContainer = ({
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <button className="btn btn-primary" onClick={() => setPages(pages + 1)}>
+        <button
+          className="btn btn-primary"
+          style={{ marginTop: "10px" }}
+          onClick={() => setPages(pages + 1)}
+        >
           Load more
         </button>
       )}

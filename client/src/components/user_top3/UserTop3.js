@@ -8,11 +8,11 @@ const UserTop3 = ({ rating, count, Component, question, user }) => {
     <div className="userTop5">
       <div className="userTop5__left">
         <p>{rating}</p>
-        {!user?.avatarUrl ? (
+        {!user?.firstName ? (
           <Component question={question} />
         ) : (
           <div className="userAvatar">
-            <Avatar src={user?.firstName} />
+            <Avatar src={user?.avatarUrl} />
             <Link
               to={`/user/${user.userId}`}
             >{`${user?.firstName} ${user?.lastName}`}</Link>

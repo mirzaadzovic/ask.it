@@ -41,14 +41,3 @@
   margin: 10px 0;
   background-color: var(--light-gray);
 }
-
-@keyframes fadein {
-  0% {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-}
