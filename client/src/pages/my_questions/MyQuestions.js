@@ -25,7 +25,7 @@ const MyQuestions = () => {
   useEffect(() => {
     if (!user) navigate("/login");
     fetchData();
-  }, [user]);
+  }, [user, params["*"]]);
 
   if (error)
     return (

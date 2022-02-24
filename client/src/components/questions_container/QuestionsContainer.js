@@ -18,19 +18,33 @@ const QuestionsContainer = ({
   isLoading,
 }) => {
   const [pages, setPages] = useState(0);
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState(null);
 
   useEffect(async () => {
-    const response = await fetchQuestions(pages, userId);
-    setQuestions([...questions, ...response]);
-  }, [userId, pages, fetchQuestions, setQuestions]);
+    setPages(0);
+    const response = await fetchQuestions(0, userId);
+    setQuestions(response);
+  }, [userId]);
 
-  // if (questions.length === 0)
-  //   return (
-  //     <center style={{ padding: "40px" }}>
-  //       {userId ? <p>No questions asked</p> : <LoadingSpinner />}
-  //     </center>
-  //   );
+  const loadMore = async () => {
+    const response = await fetchQuestions(pages + 1, userId);
+    setQuestions([...questions, ...response]);
+    setPages(pages + 1);
+  };
+
+  if (questions?.length === 0)
+    return (
+      <center style={{ padding: "40px" }}>
+        <p>No questions asked</p>
+      </center>
+    );
+
+  if (!questions)
+    return (
+      <center style={{ padding: "40px" }}>
+        <LoadingSpinner />
+      </center>
+    );
 
   return (
     <div className="questionsContainer app__questions">
@@ -51,7 +65,7 @@ const QuestionsContainer = ({
         <button
           className="btn btn-primary"
           style={{ marginTop: "10px" }}
-          onClick={() => setPages(pages + 1)}
+          onClick={loadMore}
         >
           Load more
         </button>
