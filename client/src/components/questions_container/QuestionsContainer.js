@@ -42,6 +42,7 @@ const QuestionsContainer = ({
   if (!questions)
     return (
       <center style={{ padding: "40px" }}>
+        {!userId && <QuestionForm setQuestions={setQuestions} />}
         <LoadingSpinner />
       </center>
     );
