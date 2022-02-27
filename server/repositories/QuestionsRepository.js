@@ -19,6 +19,8 @@ class QuestionsRepository extends BaseRepository {
       try {
         const count = 5;
         const page = req.query.pages || 0;
+        const { userId } = req.query;
+
         const response = await this.Model.findAll({
           include: [
             {
@@ -28,7 +30,14 @@ class QuestionsRepository extends BaseRepository {
             { model: Answer, as: "answers" },
             { model: Reaction, as: "reactions" },
           ],
+          where: userId
+            ? {
+                userid: userId,
+              }
+            : {},
           order: [["questiondate", "DESC"]],
+          limit: count,
+          offset: page * count,
         }).catch((err) => console.log(err.toString()));
 
         if (!response) return res.status(400).send("Bad request");
@@ -40,12 +49,11 @@ class QuestionsRepository extends BaseRepository {
           reactions: new ReactionDto(q.reactions),
         }));
 
-        const { userId } = req.query;
-        if (userId)
-          questions = questions.filter((q) => q.userId === parseInt(userId));
+        // if (userId)
+        //   questions = questions.filter((q) => q.userId === parseInt(userId));
 
-        questions = questions.slice(count * page, count * page + count);
-        console.log(questions);
+        // // questions = questions.slice(count * page, count * page + count);
+        // console.log(questions);
 
         res.status(200).json(questions);
       } catch (err) {
